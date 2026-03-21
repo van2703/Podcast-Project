@@ -29,15 +29,15 @@ graph TD;
     E -->|Git Push| F[GitHub Pages Web Player];
 
 ## How to Run It Locally
-Clone this repository to your computer.
+1. Clone this repository to your computer.
 
-Install the required libraries:
+2. Install the required libraries:
 pip install feedparser google-genai edge-tts python-dotenv
 
-Create a .env file and add your Gemini API Key:
+3. Create a .env file and add your Gemini API Key:
 GEMINI_API_KEY=your_key_here
 
-Run the Python files in this order:
+4. Run the Python files in this order:
 
 python fetch_bbc.py
 
