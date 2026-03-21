@@ -27,20 +27,15 @@ graph TD;
     C -->|Output| D[podcast_script.txt];
     D -->|text_to_voice.py| E((bbc_podcast.mp3));
     E -->|Git Push| F[GitHub Pages Web Player];
+```
 
 ## How to Run It Locally
 1. Clone this repository to your computer.
-
 2. Install the required libraries:
-pip install feedparser google-genai edge-tts python-dotenv
-
-3. Create a .env file and add your Gemini API Key:
-GEMINI_API_KEY=your_key_here
-
+   `pip install feedparser google-genai edge-tts python-dotenv`
+3. Create a `.env` file and add your Gemini API Key:
+   `GEMINI_API_KEY=your_key_here`
 4. Run the Python files in this order:
-
-python fetch_bbc.py
-
-python generate_script.py
-
-python text_to_voice.py
+   - `python fetch_bbc.py`
+   - `python generate_script.py`
+   - `python text_to_voice.py`
