@@ -3,7 +3,7 @@ import edge_tts
 import os
 
 # Cấu hình giọng đọc (Aria là giọng nữ Mỹ rất tự nhiên, truyền cảm)
-VOICE = "en-US-AriaNeural"  
+VOICE = "en-US-ChristopherNeural"  
 # Mày có thể đổi sang giọng nam bằng cách thay thành: "en-US-ChristopherNeural"
 
 INPUT_FILE = "podcast_script.txt"
