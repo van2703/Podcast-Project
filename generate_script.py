@@ -23,11 +23,11 @@ def create_script():
     client = genai.Client(api_key=GEMINI_API_KEY)
     
     prompt = f"""
-    You are a podcast host. Read the news below and write a script for a 3-minute podcast.
+    You are a podcast host. Read the news below and write a script for a 5-minute podcast.
     RULES:
     1. NO FAKE NEWS: Use only the text provided.
     2. USE SIMPLE ENGLISH: Use basic vocabulary and short sentences.
-    3. Length: About 400-500 words.
+    3. Length: About 700-800 words.
     4. ONLY output the spoken words. No sound effect tags like [Music].
 
     NEWS DATA:
