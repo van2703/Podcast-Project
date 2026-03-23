@@ -2,50 +2,46 @@ name: Auto Daily BBC Podcast
 
 on:
   schedule:
-    # Hẹn giờ: 23:00 UTC (Giờ quốc tế) = 06:00 AM sáng giờ Việt Nam.
     - cron: '0 23 * * *'
-  workflow_dispatch: # Nút bấm ma thuật để chạy thử trên web GitHub
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Quyền tối cao để bot ghi đè file lên repo của chị
+      contents: write
 
     steps:
-      - name: 1. Tải code từ kho lưu trữ (Checkout Repository)
+      - name: 1. Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 2. Cài đặt Python (Setup Python)
+      - name: 2. Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 3. Cài đặt hệ thống lõi cho Pydub (Install FFmpeg)
+      - name: 3. Install FFmpeg
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: 4. Cài đặt thư viện Python (Install Python Libraries)
+      - name: 4. Install Python Libraries
         run: |
           python -m pip install --upgrade pip
-          # Đã vá lỗi bẫy số 1: Dùng google-genai bản mới nhất
-          pip install google-genai edge-tts pydub soundfile numpy python-dotenv 
-          # Thêm thư viện requests, bs4 nếu file cào tin fetch_bbc.py của chị cần dùng:
-          pip install requests beautifulsoup4
+          # Bổ sung thêm feedparser vào cuối danh sách này
+          pip install google-genai edge-tts pydub soundfile numpy python-dotenv feedparser
 
-      - name: 5. Khởi tạo thư mục chống lỗi (Ensure Directories Exist)
-        # Phòng trường hợp Git lờ đi thư mục trống, tạo sẵn các folder để code không bị văng
+      - name: 5. Ensure Directories Exist
         run: |
           mkdir -p data scripts audios music
 
-      - name: 6. Chạy Dây Chuyền AI Podcast (Run Python Scripts)
+      - name: 6. Run Python Scripts
         env:
-          # Mở két sắt GitHub Secrets lấy chìa khóa Gemini
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Khai báo trực tiếp link RSS công khai ở đây cho bot nó đọc
+          BBC_RSS_URL: "https://feeds.bbci.co.uk/news/world/rss.xml" 
         run: |
           echo "Bắt đầu cào tin BBC..."
-          # Đảm bảo file cào tin của chị tên đúng là fetch_bbc.py nhé
           python fetch_bbc.py 
           
           echo "Bắt đầu gọi Gemini làm kịch bản..."
@@ -54,14 +50,10 @@ jobs:
           echo "Bắt đầu thu âm và mix nhạc..."
           python text_to_voice.py
 
-      - name: 7. Lưu kết quả và đẩy lên web nền hồng (Commit and Push)
+      - name: 7. Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
-          
-          # Gom tất cả "thành phẩm" mới ra lò
           git add data/ scripts/ audios/ config.js
-          
-          # Lưu lại và ném lên mạng
           git commit -m "Auto-generate daily podcast & update config" || echo "No changes to commit"
           git push
