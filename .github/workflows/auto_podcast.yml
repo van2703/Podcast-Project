@@ -2,53 +2,66 @@ name: Auto Daily BBC Podcast
 
 on:
   schedule:
-    # Hẹn giờ chạy: 23:00 UTC (Giờ máy chủ) tương đương 06:00 AM giờ Việt Nam
+    # Hẹn giờ: 23:00 UTC (Giờ quốc tế) = 06:00 AM sáng giờ Việt Nam.
     - cron: '0 23 * * *'
-  workflow_dispatch: # Nút bấm ma thuật giúp chị chạy tay trên web để test bất cứ lúc nào
+  workflow_dispatch: # Nút bấm ma thuật để chạy thử trên web GitHub
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Cấp quyền tối cao để con bot được phép đẩy file mới lên repo
+      contents: write # Quyền tối cao để bot ghi đè file lên repo của chị
 
     steps:
-      - name: Checkout Repository
+      - name: 1. Tải code từ kho lưu trữ (Checkout Repository)
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: 2. Cài đặt Python (Setup Python)
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install System Dependencies (FFmpeg for Pydub)
-        # Bắt buộc phải cài ffmpeg trên máy chủ Linux thì pydub mới mix nhạc được
+      - name: 3. Cài đặt hệ thống lõi cho Pydub (Install FFmpeg)
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: Install Python Libraries
-        # Cài các thư viện cần thiết. Chị có xài thư viện cào tin nào (như requests, bs4) thì thêm vào đây nhé
+      - name: 4. Cài đặt thư viện Python (Install Python Libraries)
         run: |
           python -m pip install --upgrade pip
-          pip install google-generativeai edge-tts pydub soundfile numpy
+          # Đã vá lỗi bẫy số 1: Dùng google-genai bản mới nhất
+          pip install google-genai edge-tts pydub soundfile numpy python-dotenv 
+          # Thêm thư viện requests, bs4 nếu file cào tin fetch_bbc.py của chị cần dùng:
+          pip install requests beautifulsoup4
 
-      - name: Run Python Scripts
-        env:
-           # Kéo API Key từ két sắt bảo mật của GitHub ra (Sẽ cài đặt ở Bước 2)
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        # Chỗ này cực kỳ quan trọng:
-        # 1. Chạy file lấy tin tức và gọi Gemini viết kịch bản trước (tao giả sử file đó tên là main.py)
-        # 2. Sau đó mới chạy file text_to_voice.py để làm audio
+      - name: 5. Khởi tạo thư mục chống lỗi (Ensure Directories Exist)
+        # Phòng trường hợp Git lờ đi thư mục trống, tạo sẵn các folder để code không bị văng
         run: |
-          python generate_script.py
+          mkdir -p data scripts audios music
+
+      - name: 6. Chạy Dây Chuyền AI Podcast (Run Python Scripts)
+        env:
+          # Mở két sắt GitHub Secrets lấy chìa khóa Gemini
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "Bắt đầu cào tin BBC..."
+          # Đảm bảo file cào tin của chị tên đúng là fetch_bbc.py nhé
+          python fetch_bbc.py 
+          
+          echo "Bắt đầu gọi Gemini làm kịch bản..."
+          python generate_script.py 
+          
+          echo "Bắt đầu thu âm và mix nhạc..."
           python text_to_voice.py
 
-      - name: Commit and Push to GitHub Pages
-        # Bot tự động gom các file .wav trong thư mục audios/ và file config.js mới để đẩy lên web
+      - name: 7. Lưu kết quả và đẩy lên web nền hồng (Commit and Push)
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
-          git add audios/ scripts/ config.js
+          
+          # Gom tất cả "thành phẩm" mới ra lò
+          git add data/ scripts/ audios/ config.js
+          
+          # Lưu lại và ném lên mạng
           git commit -m "Auto-generate daily podcast & update config" || echo "No changes to commit"
           git push
