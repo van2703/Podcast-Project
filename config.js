@@ -1,2 +1,8 @@
-const PODCAST_LIST = ['audios/bbc_podcast_20260323_222734.wav', 'audios/bbc_podcast_20260323_211837.wav', 'audios/bbc_podcast_20260323_172524.wav', 'audios/bbc_podcast_20260323_172012.wav', 'audios/bbc_podcast_20260323_170327.wav'];
-const LATEST_PODCAST = "audios/bbc_podcast_20260323_222734.wav";
+const PODCAST_LIST = [
+    {
+        "url": "audios/bbc_podcast_20260323_171552.wav",
+        "title": "Peace Talks, Climate Fears, and New Rules Explained",
+        "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
+    }
+];
+const LATEST_PODCAST = "audios/bbc_podcast_20260323_171552.wav";
