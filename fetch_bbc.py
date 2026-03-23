@@ -18,8 +18,6 @@ def clean_old_news():
 # Gọi hàm này ĐẦU TIÊN trước khi chạy code tải bài báo của chị
 clean_old_news()
 
-
-
 import feedparser
 import re # Dùng thư viện này để lọc tên file cho sạch nhất
 from dotenv import load_dotenv

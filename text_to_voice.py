@@ -51,11 +51,23 @@ def create_voice():
             sf.write(audio_filename, final_audio, 24000)
             print(f"✨ Xong! Đã lưu file âm thanh tại: {audio_filename}")
             
-            # 3. CẬP NHẬT CHO WEB (Update Web Config)
-            # Tạo một file config.js để HTML đọc
+            # 3. CẬP NHẬT CHO WEB KỂU MỚI (TẠO PLAYLIST)
+            # Quét toàn bộ file .wav trong thư mục audios
+            all_podcasts = glob.glob('audios/*.wav')
+            
+            # Sắp xếp để bài mới nhất (thời gian tạo gần nhất) lên đầu danh sách
+            all_podcasts.sort(key=os.path.getctime, reverse=True)
+            
+            # Quan trọng: Đổi dấu gạch chéo ngược (\) của Windows thành gạch chéo tới (/) cho Web
+            podcast_list_web = [p.replace('\\', '/') for p in all_podcasts]
+            
+            # Ghi danh sách (Array) vào config.js
             with open("config.js", "w", encoding="utf-8") as f:
-                f.write(f'const LATEST_PODCAST = "{audio_filename}";')
-            print("🌐 Đã cập nhật config.js cho trang web!")
+                f.write(f'const PODCAST_LIST = {podcast_list_web};\n')
+                if podcast_list_web:
+                    f.write(f'const LATEST_PODCAST = "{podcast_list_web[0]}";\n')
+                    
+            print("🌐 Đã cập nhật config.js với danh sách Playlist mới nhất!")
             
     except Exception as e:
         print(f"❌ Lỗi: {e}")
