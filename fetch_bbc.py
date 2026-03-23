@@ -1,5 +1,26 @@
-import feedparser
 import os
+import glob
+
+# Thư mục chứa bài báo (Chị nhớ sửa lại tên biến thư mục trong code cũ của mày cho khớp nha)
+NEWS_DIR = "data"
+
+def clean_old_news():
+    print("🧹 Đang dọn dẹp tin tức cũ từ hôm qua...")
+    if not os.path.exists(NEWS_DIR):
+        os.makedirs(NEWS_DIR)
+        
+    # Tìm và xóa tất cả các file .txt trong thư mục tin tức
+    files = glob.glob(f"{NEWS_DIR}/*.txt")
+    for f in files:
+        os.remove(f)
+    print("✨ Đã dọn sạch! Sẵn sàng tải tin tức mới nhất của BBC.")
+
+# Gọi hàm này ĐẦU TIÊN trước khi chạy code tải bài báo của chị
+clean_old_news()
+
+
+
+import feedparser
 import re # Dùng thư viện này để lọc tên file cho sạch nhất
 from dotenv import load_dotenv
 

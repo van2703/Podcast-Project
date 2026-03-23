@@ -1,33 +1,64 @@
-import asyncio
-import edge_tts
 import os
+import glob
+import numpy as np
+import soundfile as sf
+from datetime import datetime
+from kokoro import KPipeline
 
-# Cấu hình giọng đọc (Aria là giọng nữ Mỹ rất tự nhiên, truyền cảm)
-VOICE = "ja-JP-NanamiNeural" 
-# Mày có thể đổi sang giọng nam bằng cách thay thành: "en-US-ChristopherNeural"
+def get_latest_script():
+    # Tìm tất cả các file .txt trong thư mục scripts
+    list_of_files = glob.glob('scripts/*.txt')
+    if not list_of_files:
+        return None
+    # Trả về file được tạo gần đây nhất
+    latest_file = max(list_of_files, key=os.path.getctime)
+    return latest_file
 
-INPUT_FILE = "podcast_script.txt"
-OUTPUT_FILE = "bbc_podcast.mp3"
-
-async def create_voice():
-    if not os.path.exists(INPUT_FILE):
-        print(f"❌ Không tìm thấy file {INPUT_FILE}. Mày phải chạy file generate_script.py trước nha fen!")
+def create_voice():
+    # 1. Tự động lấy kịch bản mới nhất (Auto-get latest script)
+    input_file = get_latest_script()
+    
+    if not input_file:
+        print("❌ Không tìm thấy kịch bản nào trong thư mục 'scripts/'.")
         return
 
-    print("🎙️ Đang chuẩn bị phòng thu (Microsoft Edge TTS)...")
-    
-    # Đọc kịch bản
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+    print(f"📖 Đang đọc kịch bản mới nhất: {input_file}")
+    with open(input_file, "r", encoding="utf-8") as f:
         script_text = f.read()
 
-    print(f"🎧 Đang thu âm giọng {VOICE} (Chờ tao vài giây)...")
-    
-    # Chuyển đổi và lưu thành mp3
-    communicate = edge_tts.Communicate(script_text, VOICE)
-    await communicate.save(OUTPUT_FILE)
-    
-    print(f"✨ Xuất sắc! File MP3 siêu cảm xúc đã ra lò: {OUTPUT_FILE}")
+    # Tạo thư mục audio nếu chưa có
+    if not os.path.exists("audios"):
+        os.makedirs("audios")
+
+    print("🎙️ Đang nạp AI Kokoro...")
+    try:
+        pipeline = KPipeline(lang_code='b')
+        generator = pipeline(script_text, voice='bf_emma', speed=1.05, split_pattern=r'\n+')
+
+        print("🎧 Đang thu âm...")
+        all_audio_chunks = []
+        for i, (graphemes, phonemes, audio) in enumerate(generator):
+            if audio is not None:
+                all_audio_chunks.append(audio)
+                
+        if all_audio_chunks:
+            final_audio = np.concatenate(all_audio_chunks)
+            
+            # 2. Lưu audio vào thư mục podcasts/
+            current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+            audio_filename = f"audios/bbc_podcast_{current_time}.wav"
+            
+            sf.write(audio_filename, final_audio, 24000)
+            print(f"✨ Xong! Đã lưu file âm thanh tại: {audio_filename}")
+            
+            # 3. CẬP NHẬT CHO WEB (Update Web Config)
+            # Tạo một file config.js để HTML đọc
+            with open("config.js", "w", encoding="utf-8") as f:
+                f.write(f'const LATEST_PODCAST = "{audio_filename}";')
+            print("🌐 Đã cập nhật config.js cho trang web!")
+            
+    except Exception as e:
+        print(f"❌ Lỗi: {e}")
 
 if __name__ == "__main__":
-    # edge_tts sử dụng công nghệ bất đồng bộ (async) để chạy nhanh hơn
-    asyncio.run(create_voice())
+    create_voice()

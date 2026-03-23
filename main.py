@@ -19,9 +19,9 @@ def run_pipeline():
     print("\n[2/3] Đang nhờ AI soạn kịch bản...")
     generate_script.create_script()
     
-    # Bước 3: Thu âm (Vì hàm này dùng async nên phải gọi bằng asyncio.run)
+   # Bước 3: Thu âm
     print("\n[3/3] Đang chuyển kịch bản thành giọng nói...")
-    asyncio.run(text_to_voice.create_voice())
+    text_to_voice.create_voice()
     
     end_time = time.time()
     
