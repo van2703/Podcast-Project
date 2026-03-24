@@ -42,7 +42,6 @@
             border-radius: 20px;
         }
 
-        /* --- UI SPOTIFY --- */
         .playlist {
             max-height: 280px;
             overflow-y: auto;
@@ -52,7 +51,6 @@
             padding-right: 5px;
             text-align: left;
         }
-        /* Làm đẹp thanh cuộn */
         .playlist::-webkit-scrollbar { width: 6px; }
         .playlist::-webkit-scrollbar-thumb { background: #e57399; border-radius: 10px; }
 
@@ -74,12 +72,23 @@
             border-color: #d85c85;
         }
         
-        /* Cấu hình hiển thị chữ */
         .track-title {
             font-weight: bold;
             font-size: 1.05em;
             margin-bottom: 4px;
         }
+        
+        /* CSS MỚI CHO NGÀY GIỜ */
+        .track-meta {
+            font-size: 0.75em;
+            color: #c86b8e;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .active-song .track-meta {
+            color: #ffe4eb; /* Màu sáng hơn khi bài hát đang được chọn */
+        }
+
         .track-summary {
             font-size: 0.85em;
             opacity: 0.9;
@@ -102,28 +111,58 @@
         <script src="config.js"></script>
 
         <script>
+            // Hàm tính toán thời gian "bao nhiêu phút trước"
+            function timeAgo(dateString) {
+                if (!dateString) return "";
+                const pastDate = new Date(dateString);
+                const now = new Date();
+                
+                // Tính độ chênh lệch bằng mili-giây
+                const diffMs = now - pastDate; 
+                
+                // Quy đổi ra phút, giờ, ngày
+                const diffMins = Math.round(diffMs / 60000);
+                const diffHours = Math.round(diffMs / 3600000);
+                const diffDays = Math.round(diffMs / 86400000);
+
+                if (diffMins < 1) return "Vừa xong";
+                if (diffMins < 60) return `${diffMins} phút trước`;
+                if (diffHours < 24) return `${diffHours} giờ trước`;
+                return `${diffDays} ngày trước`;
+            }
+
             if (typeof PODCAST_LIST !== 'undefined' && PODCAST_LIST.length > 0) {
                 let player = document.getElementById("podcastPlayer");
                 let source = document.getElementById("audioSource");
                 let container = document.getElementById("playlistContainer");
 
-                // Mặc định load bài đầu tiên
                 source.src = LATEST_PODCAST;
                 player.load();
 
-                // Tạo danh sách thẻ bài
                 PODCAST_LIST.forEach((track, index) => {
                     let card = document.createElement("div");
                     card.className = "track-card";
                     if (index === 0) card.classList.add("active-song");
 
-                    // Bơm tiêu đề và tóm tắt vào UI, không hề đụng đến tên file .wav
+                    // Xử lý hiển thị ngày giờ
+                    let dateStr = "";
+                    let timeAgoStr = "";
+                    
+                    if (track.timestamp) {
+                        const dateObj = new Date(track.timestamp);
+                        // Lấy ngày/tháng/năm chuẩn Việt Nam
+                        dateStr = dateObj.toLocaleDateString('vi-VN'); 
+                        // Lấy thời gian "X phút trước"
+                        timeAgoStr = timeAgo(track.timestamp);
+                    }
+
+                    // Bơm dữ liệu vào thẻ HTML
                     card.innerHTML = `
                         <div class="track-title">🎧 ${track.title}</div>
+                        ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} •  ${timeAgoStr}</div>` : ''}
                         <div class="track-summary">${track.summary}</div>
                     `;
 
-                    // Xử lý sự kiện bấm nghe nhạc
                     card.onclick = function() {
                         source.src = track.url;
                         player.load();

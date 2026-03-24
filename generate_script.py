@@ -37,8 +37,8 @@ def create_script():
     
     You MUST return the response strictly as a JSON object with this exact structure:
     {{
-        "title": "Create a short Title here (7 to 9 words)",
-        "summary": "Create a short Headline Summary here (1-2 sentences)",
+        "title": "Create a short Title here (6 to 7 words)",
+        "summary": "Create a short Headline Summary here (1 sentence)",
         "script": "Your simple english podcast script here (ONLY the spoken words, no [Music] tags)"
     }}
 
