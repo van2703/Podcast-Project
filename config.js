@@ -1,5 +1,11 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260325_062229.wav",
+        "title": "Global News: Conflicts, Deals, and Tragedies",
+        "summary": "Today we cover major drone attacks in Ukraine, shifting global conflict rules, a tragic plane crash, and a big trade deal between Australia and the EU.",
+        "timestamp": "2026-03-25T06:22:31.585673"
+    },
+    {
         "url": "audios/bbc_podcast_20260324_165532.mp3",
         "title": "Global Currents: Vets, AI, and Geopolitical Shocks",
         "summary": "From consumer protection and tech ethics to geopolitical tremors and aviation tragedies, we navigate the week's most compelling global narratives.",
@@ -145,4 +151,4 @@ const PODCAST_LIST = [
         "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260324_165532.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260325_062229.wav";
