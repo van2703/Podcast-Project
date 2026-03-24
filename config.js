@@ -1,5 +1,11 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260324_111827.wav",
+        "title": "World News: Crashes, Politics, and Presidential Mix",
+        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
+        "timestamp": "2026-03-24T11:18:29.970453"
+    },
+    {
         "url": "audios/bbc_podcast_20260324_105754.wav",
         "title": "World News: Crashes, Politics, and Presidential Mix",
         "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
@@ -37,4 +43,4 @@ const PODCAST_LIST = [
         "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260324_105754.wav";
+const LATEST_PODCAST = "audios/bbc_podcast_20260324_111827.wav";
