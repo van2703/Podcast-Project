@@ -1,5 +1,10 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260324_104151.wav",
+        "title": "World News Update: Plane Crashes, Protests, and Political Votes",
+        "summary": "Today, we cover a range of global events, from plane crashes and political setbacks to international diplomacy and legal trials. Join us for a simple look at the latest headlines."
+    },
+    {
         "url": "audios/bbc_podcast_20260324_103749.wav",
         "title": "Global Events: Diplomacy, Tragedies, and Political Challenges",
         "summary": "We cover the US President's diplomacy, two recent plane crashes, a trial in Angola, and political challenges in Italy. Join us for a simple look at the world's most important headlines."
@@ -15,4 +20,4 @@ const PODCAST_LIST = [
         "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260324_103749.wav";
+const LATEST_PODCAST = "audios/bbc_podcast_20260324_104151.wav";
