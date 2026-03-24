@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBC Daily Podcast</title>
     <style>
+        /* 🌟 BƯỚC 1: KHAI BÁO BIẾN CSS (CSS VARIABLES) 🌟 */
+        /* Mặc định là Theme Pinky (Hồng) của chị */
+        :root {
+            --bg-body: #f8e7ee;
+            --bg-container: rgb(246, 220, 220);
+            --text-main: #713651;
+            --text-sub: #a83e73;
+            --card-bg: #fff0f5;
+            --card-border: #ffb6c1;
+            --card-hover: #ffe4eb;
+            --active-bg: #e57399;
+            --active-text: #ffffff;
+            --meta-text: #c86b8e;
+            --sticker-filter: none; /* Không làm mờ sticker */
+        }
+
+        /* Theme Greeny (Xanh lá dứa) */
+        body.theme-greeny {
+            --bg-body: #e8f5e9;
+            --bg-container: #c8e6c9;
+            --text-main: #1b5e20;
+            --text-sub: #388e3c;
+            --card-bg: #f1f8e9;
+            --card-border: #a5d6a7;
+            --card-hover: #e8f5e9;
+            --active-bg: #4caf50;
+            --active-text: #ffffff;
+            --meta-text: #66bb6a;
+        }
+
+        /* Theme Blue Baby (Xanh da trời) */
+        body.theme-bluebaby {
+            --bg-body: #e3f2fd;
+            --bg-container: #bbdefb;
+            --text-main: #0d47a1;
+            --text-sub: #1976d2;
+            --card-bg: #e3f2fd;
+            --card-border: #90caf9;
+            --card-hover: #bbdefb;
+            --active-bg: #2196f3;
+            --active-text: #ffffff;
+            --meta-text: #42a5f5;
+        }
+
+        /* Theme Black-White (Trắng Đen / Dark Mode) */
+        body.theme-blackwhite {
+            --bg-body: #12121286;
+            --bg-container: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #b3b3b3;
+            --card-bg: #2c2c2c;
+            --card-border: #444444;
+            --card-hover: #3a3a3acd;
+            --active-bg: #ffffff;
+            --active-text: #000000b7;
+            --meta-text: #888888;
+        }
+
+        /* 🌟 BƯỚC 2: ÁP DỤNG BIẾN CSS VÀO GIAO DIỆN 🌟 */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -12,19 +71,44 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8e7ee;
+            background-color: var(--bg-body); /* Dùng biến thay vì màu cứng */
             margin: 0;
-            color: #994a62;
+            color: var(--text-main);
+            transition: background-color 0.4s ease; /* Hiệu ứng chuyển màu mượt */
         }
+        
+        /* Bộ chọn Theme (Theme Switcher UI) */
+        .theme-switcher {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+        }
+        .theme-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .theme-btn:hover { transform: scale(1.2); }
+        .btn-pinky { background-color: #f8e7ee; border-color: #e57399; }
+        .btn-greeny { background-color: #e8f5e9; border-color: #4caf50; }
+        .btn-bluebaby { background-color: #e3f2fd; border-color: #2196f3; }
+        .btn-blackwhite { background-color: #121212; border-color: #ffffff; }
+
         .container {
-            background: rgb(246, 220, 220);
+            background: var(--bg-container);
             padding: 40px 30px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(153, 74, 98, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 90%;
             max-width: 500px;
             position: relative;
+            transition: background-color 0.4s ease;
         }
         .my-sticker {
             position: absolute;
@@ -32,9 +116,11 @@
             right: -15px;
             width: 85px;
             transform: rotate(15deg);
+            filter: var(--sticker-filter); /* Đổi màu sticker theo theme */
+            transition: filter 0.4s ease;
         }
-        h1 { color: #713651; margin-bottom: 5px; font-weight: 800;}
-        p { color: #a83e73; line-height: 1.5; font-size: 0.9em; margin-bottom: 25px;}
+        h1 { color: var(--text-main); margin-bottom: 5px; font-weight: 800;}
+        p.subtitle { color: var(--text-sub); line-height: 1.5; font-size: 0.9em; margin-bottom: 25px;}
         
         audio {
             width: 100%;
@@ -52,55 +138,47 @@
             text-align: left;
         }
         .playlist::-webkit-scrollbar { width: 6px; }
-        .playlist::-webkit-scrollbar-thumb { background: #e57399; border-radius: 10px; }
+        .playlist::-webkit-scrollbar-thumb { background: var(--active-bg); border-radius: 10px; }
 
         .track-card {
-            background-color: #fff0f5;
-            border: 1px solid #ffb6c1;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .track-card:hover {
-            background-color: #ffe4eb;
+            background-color: var(--card-hover);
             transform: translateY(-2px);
         }
         .active-song {
-            background-color: #e57399;
-            color: white;
-            border-color: #d85c85;
+            background-color: var(--active-bg);
+            color: var(--active-text);
+            border-color: var(--active-bg);
         }
-        
-        .track-title {
-            font-weight: bold;
-            font-size: 1.05em;
-            margin-bottom: 4px;
-        }
-        
-        /* CSS MỚI CHO NGÀY GIỜ */
-        .track-meta {
-            font-size: 0.75em;
-            color: #c86b8e;
-            margin-bottom: 8px;
-            font-style: italic;
-        }
-        .active-song .track-meta {
-            color: #ffe4eb; /* Màu sáng hơn khi bài hát đang được chọn */
-        }
-
-        .track-summary {
-            font-size: 0.85em;
+        .active-song .track-meta, .active-song .track-summary {
+            color: var(--active-text);
             opacity: 0.9;
-            line-height: 1.3;
         }
+        
+        .track-title { font-weight: bold; font-size: 1.05em; margin-bottom: 4px; }
+        .track-meta { font-size: 0.75em; color: var(--meta-text); margin-bottom: 8px; font-style: italic; }
+        .track-summary { font-size: 0.85em; color: var(--text-main); opacity: 0.8; line-height: 1.3; }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="theme-switcher">
+            <button class="theme-btn btn-pinky" onclick="setTheme('pinky')" title="Pinky"></button>
+            <button class="theme-btn btn-greeny" onclick="setTheme('greeny')" title="Greeny"></button>
+            <button class="theme-btn btn-bluebaby" onclick="setTheme('bluebaby')" title="Blue Baby"></button>
+            <button class="theme-btn btn-blackwhite" onclick="setTheme('blackwhite')" title="Black & White"></button>
+        </div>
+
         <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
-        <h1>🎙️ BBC AI Podcasst</h1>
-        <p>This podcast is automatically generated by AI from the latest BBC news.<br> Lovely Meo Meo </p>
+        <h1>🎙️ BBC AI Daily</h1>
+        <p class="subtitle">Tự động tổng hợp và đọc báo lúc 6h sáng.<br>Powered by Gemini & Edge TTS.</p>
         
         <audio id="podcastPlayer" controls>
             <source id="audioSource" src="" type="audio/wav">
@@ -111,16 +189,32 @@
         <script src="config.js"></script>
 
         <script>
-            // Hàm tính toán thời gian "bao nhiêu phút trước"
+            // 🌟 BƯỚC 4: LOGIC ĐỔI THEME VÀ LƯU VÀO BỘ NHỚ 🌟
+            function setTheme(themeName) {
+                // Xóa hết các class theme cũ
+                document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
+                
+                // Nếu không phải pinky (mặc định), thì add class tương ứng vào
+                if (themeName !== 'pinky') {
+                    document.body.classList.add('theme-' + themeName);
+                }
+                
+                // Lưu lựa chọn vào LocalStorage để nhớ cho lần sau
+                localStorage.setItem('selectedTheme', themeName);
+            }
+
+            // Khi web vừa tải xong, kiểm tra xem user đã lưu màu nào chưa
+            const savedTheme = localStorage.getItem('selectedTheme') || 'pinky';
+            setTheme(savedTheme);
+
+
+            // --- LOGIC PLAYLIST & TÍNH THỜI GIAN GIỮ NGUYÊN NHƯ CŨ ---
             function timeAgo(dateString) {
                 if (!dateString) return "";
                 const pastDate = new Date(dateString);
                 const now = new Date();
-                
-                // Tính độ chênh lệch bằng mili-giây
                 const diffMs = now - pastDate; 
                 
-                // Quy đổi ra phút, giờ, ngày
                 const diffMins = Math.round(diffMs / 60000);
                 const diffHours = Math.round(diffMs / 3600000);
                 const diffDays = Math.round(diffMs / 86400000);
@@ -144,22 +238,18 @@
                     card.className = "track-card";
                     if (index === 0) card.classList.add("active-song");
 
-                    // Xử lý hiển thị ngày giờ
                     let dateStr = "";
                     let timeAgoStr = "";
                     
                     if (track.timestamp) {
                         const dateObj = new Date(track.timestamp);
-                        // Lấy ngày/tháng/năm chuẩn Việt Nam
                         dateStr = dateObj.toLocaleDateString('vi-VN'); 
-                        // Lấy thời gian "X phút trước"
                         timeAgoStr = timeAgo(track.timestamp);
                     }
 
-                    // Bơm dữ liệu vào thẻ HTML
                     card.innerHTML = `
                         <div class="track-title">🎧 ${track.title}</div>
-                        ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} •  ${timeAgoStr}</div>` : ''}
+                        ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} • ⏳ ${timeAgoStr}</div>` : ''}
                         <div class="track-summary">${track.summary}</div>
                     `;
 
