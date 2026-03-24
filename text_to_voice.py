@@ -85,7 +85,7 @@ async def create_voice():
         print(f"✨ XUẤT SẮC! Đã mix xong file siêu phẩm tại: {final_output_path}")
 
         # ---------------------------------------------------------
-        # 🌟 CẬP NHẬT CONFIG.JS (BẢN CHUẨN JSON OBJECT DÀNH CHO GIAO DIỆN SPOTIFY) 🌟
+        # 🌟 CẬP NHẬT CONFIG.JS 🌟
         # ---------------------------------------------------------
         config_path = "config.js"
         podcast_list = []
@@ -104,12 +104,14 @@ async def create_voice():
                         podcast_list = [item for item in parsed_list if isinstance(item, dict)]
             except Exception as e:
                 print(f"⚠️ Không thể đọc config cũ (có thể sai format), tạo mới hoàn toàn. Lỗi: {e}")
-
+        # Thêm biến lưu thời gian chuẩn ISO để JavaScript dễ đọc
+        current_iso_time = datetime.now().isoformat()
         # Tạo Object mới cho bài podcast hôm nay
         new_podcast_entry = {
             "url": final_output_path.replace('\\', '/'),
             "title": podcast_title,
-            "summary": podcast_summary
+            "summary": podcast_summary,
+            "timestamp": current_iso_time
         }
         
         # Nhét bài mới nhất lên đầu danh sách

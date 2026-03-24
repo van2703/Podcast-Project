@@ -1,6 +1,5 @@
-import asyncio
 import time
-
+import asyncio
 import fetch_bbc
 import generate_script
 import text_to_voice
@@ -21,7 +20,7 @@ def run_pipeline():
     
    # Bước 3: Thu âm
     print("\n[3/3] Đang chuyển kịch bản thành giọng nói...")
-    text_to_voice.create_voice()
+    asyncio.run(text_to_voice.create_voice())
     
     end_time = time.time()
     

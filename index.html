@@ -5,6 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBC Daily Podcast</title>
     <style>
+        /* 🌟 BƯỚC 1: BIẾN CSS TRONG SUỐT (GLASSMORPHISM) 🌟 */
+        :root {
+            --bg-image: url('background.jpg');
+            
+            /* Theme Pinky */
+            --glass-container: rgba(255, 240, 245, 0.45); 
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --text-main: #713651;
+            --text-sub: #a83e73;
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --card-hover: rgba(255, 255, 255, 0.8);
+            --active-bg: #e57399;
+            --active-text: #ffffff;
+            --meta-text: #c86b8e;
+            --sticker-filter: none;
+        }
+
+        body.theme-greeny {
+            /* Theme Greeny */
+            --glass-container: rgba(232, 245, 233, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text-main: #1b5e20;
+            --text-sub: #388e3c;
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --card-hover: rgba(255, 255, 255, 0.8);
+            --active-bg: #4caf50;
+            --active-text: #ffffff;
+            --meta-text: #66bb6a;
+        }
+
+        body.theme-bluebaby {
+            /* Theme Blue Baby */
+            --glass-container: rgba(227, 242, 253, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text-main: #0d47a1;
+            --text-sub: #1976d2;
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --card-hover: rgba(255, 255, 255, 0.8);
+            --active-bg: #2196f3;
+            --active-text: #ffffff;
+            --meta-text: #42a5f5;
+        }
+
+        body.theme-blackwhite {
+            /* Theme Dark Mode */
+            --glass-container: rgba(20, 20, 20, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f0f0f0;
+            --text-sub: #aaaaaa;
+            --card-bg: rgba(40, 40, 40, 0.6);
+            --card-hover: rgba(60, 60, 60, 0.8);
+            --active-bg: #ffffff;
+            --active-text: #000000;
+            --meta-text: #888888;
+        }
+
+        /* 🌟 BƯỚC 2: ỐP ẢNH NỀN VÀ KHUNG CHỨA 🌟 */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -12,37 +69,72 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8e7ee;
             margin: 0;
-            color: #994a62;
+            color: var(--text-main);
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: all 0.4s ease;
         }
+        
+        .theme-switcher {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .theme-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .theme-btn:hover { transform: scale(1.2); }
+        .btn-pinky { background-color: #ffb6c1; }
+        .btn-greeny { background-color: #a5d6a7; }
+        .btn-bluebaby { background-color: #90caf9; }
+        .btn-blackwhite { background-color: #424242; }
+
         .container {
-            background: rgb(246, 220, 220);
+            background: var(--glass-container);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             padding: 40px 30px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(153, 74, 98, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             text-align: center;
             width: 90%;
             max-width: 500px;
             position: relative;
+            transition: all 0.4s ease;
         }
+
         .my-sticker {
             position: absolute;
             top: -35px;
             right: -15px;
             width: 85px;
             transform: rotate(15deg);
+            filter: var(--sticker-filter);
+            transition: filter 0.4s ease;
         }
-        h1 { color: #713651; margin-bottom: 5px; font-weight: 800;}
-        p { color: #a83e73; line-height: 1.5; font-size: 0.9em; margin-bottom: 25px;}
+        h1 { color: var(--text-main); margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); }
+        p.subtitle { color: var(--text-sub); line-height: 1.5; font-size: 0.9em; margin-bottom: 25px;}
         
         audio {
             width: 100%;
             margin-bottom: 20px;
-            border-radius: 20px;
+            border-radius: 30px;
+            opacity: 0.9;
         }
 
-        /* --- UI SPOTIFY --- */
         .playlist {
             max-height: 280px;
             overflow-y: auto;
@@ -52,46 +144,52 @@
             padding-right: 5px;
             text-align: left;
         }
-        /* Làm đẹp thanh cuộn */
         .playlist::-webkit-scrollbar { width: 6px; }
-        .playlist::-webkit-scrollbar-thumb { background: #e57399; border-radius: 10px; }
+        .playlist::-webkit-scrollbar-thumb { background: var(--active-bg); border-radius: 10px; }
 
         .track-card {
-            background-color: #fff0f5;
-            border: 1px solid #ffb6c1;
-            border-radius: 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
             padding: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         .track-card:hover {
-            background-color: #ffe4eb;
-            transform: translateY(-2px);
+            background-color: var(--card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .active-song {
-            background-color: #e57399;
-            color: white;
-            border-color: #d85c85;
+            background-color: var(--active-bg);
+            color: var(--active-text);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .active-song .track-meta, .active-song .track-summary {
+            color: var(--active-text);
+            opacity: 0.9;
         }
         
-        /* Cấu hình hiển thị chữ */
-        .track-title {
-            font-weight: bold;
-            font-size: 1.05em;
-            margin-bottom: 4px;
-        }
-        .track-summary {
-            font-size: 0.85em;
-            opacity: 0.9;
-            line-height: 1.3;
-        }
+        .track-title { font-weight: bold; font-size: 1.05em; margin-bottom: 4px; }
+        .track-meta { font-size: 0.75em; color: var(--meta-text); margin-bottom: 8px; font-style: italic; }
+        .track-summary { font-size: 0.85em; color: var(--text-main); opacity: 0.8; line-height: 1.3; }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="theme-switcher">
+            <button class="theme-btn btn-pinky" onclick="setTheme('pinky')" title="Pinky"></button>
+            <button class="theme-btn btn-greeny" onclick="setTheme('greeny')" title="Greeny"></button>
+            <button class="theme-btn btn-bluebaby" onclick="setTheme('bluebaby')" title="Blue Baby"></button>
+            <button class="theme-btn btn-blackwhite" onclick="setTheme('blackwhite')" title="Dark Mode"></button>
+        </div>
+
         <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
         <h1>🎙️ BBC AI Daily</h1>
-        <p>Tự động tổng hợp và đọc báo lúc 6h sáng.<br>Powered by Gemini & Edge TTS.</p>
+        <p class="subtitle">Tự động tổng hợp và đọc báo lúc 6h sáng.<br>Powered by Gemini & Edge TTS.</p>
         
         <audio id="podcastPlayer" controls>
             <source id="audioSource" src="" type="audio/wav">
@@ -100,39 +198,64 @@
         <div class="playlist" id="playlistContainer"></div>
 
         <script src="config.js"></script>
-
         <script>
+            function setTheme(themeName) {
+                document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
+                if (themeName !== 'pinky') {
+                    document.body.classList.add('theme-' + themeName);
+                }
+                localStorage.setItem('selectedTheme', themeName);
+            }
+            const savedTheme = localStorage.getItem('selectedTheme') || 'pinky';
+            setTheme(savedTheme);
+
+            function timeAgo(dateString) {
+                if (!dateString) return "";
+                const diffMs = new Date() - new Date(dateString); 
+                const diffMins = Math.round(diffMs / 60000);
+                const diffHours = Math.round(diffMs / 3600000);
+                const diffDays = Math.round(diffMs / 86400000);
+
+                if (diffMins < 1) return "Vừa xong";
+                if (diffMins < 60) return `${diffMins} phút trước`;
+                if (diffHours < 24) return `${diffHours} giờ trước`;
+                return `${diffDays} ngày trước`;
+            }
+
             if (typeof PODCAST_LIST !== 'undefined' && PODCAST_LIST.length > 0) {
                 let player = document.getElementById("podcastPlayer");
                 let source = document.getElementById("audioSource");
                 let container = document.getElementById("playlistContainer");
 
-                // Mặc định load bài đầu tiên
                 source.src = LATEST_PODCAST;
                 player.load();
 
-                // Tạo danh sách thẻ bài
                 PODCAST_LIST.forEach((track, index) => {
                     let card = document.createElement("div");
                     card.className = "track-card";
                     if (index === 0) card.classList.add("active-song");
 
-                    // Bơm tiêu đề và tóm tắt vào UI, không hề đụng đến tên file .wav
+                    let dateStr = "";
+                    let timeAgoStr = "";
+                    if (track.timestamp) {
+                        const dateObj = new Date(track.timestamp);
+                        dateStr = dateObj.toLocaleDateString('vi-VN'); 
+                        timeAgoStr = timeAgo(track.timestamp);
+                    }
+
                     card.innerHTML = `
                         <div class="track-title">🎧 ${track.title}</div>
+                        ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} • ⏳ ${timeAgoStr}</div>` : ''}
                         <div class="track-summary">${track.summary}</div>
                     `;
 
-                    // Xử lý sự kiện bấm nghe nhạc
                     card.onclick = function() {
                         source.src = track.url;
                         player.load();
                         player.play();
-
                         document.querySelectorAll('.track-card').forEach(b => b.classList.remove('active-song'));
                         this.classList.add('active-song');
                     };
-
                     container.appendChild(card);
                 });
             } else {

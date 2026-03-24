@@ -38,6 +38,7 @@ jobs:
       - name: 6. Run Python Scripts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: 'Asia/Ho_Chi_Minh'
           # Khai báo trực tiếp link RSS công khai ở đây cho bot nó đọc
           BBC_RSS_URL: "https://feeds.bbci.co.uk/news/world/rss.xml" 
         run: |
