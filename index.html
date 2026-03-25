@@ -17,7 +17,6 @@
             --active-bg: #d7678ce0;
             --active-text: #ffffff;
             --meta-text: #c86b8e;
-            --sticker-filter: none;
         }
 
         body.theme-greeny { --glass-container: rgba(232, 245, 233, 0.45); --glass-border: rgba(255, 255, 255, 0.5); --text-main: #1b5e20; --text-sub: #388e3c; --active-bg: #5bb35eb5; --meta-text: #66bb6a; }
@@ -32,7 +31,7 @@
             color: var(--text-main); background-image: var(--bg-image); 
             background-size: cover; background-position: center; background-attachment: fixed; 
             transition: all 0.4s ease; 
-            font-size: 0.95em; /* Đã thu nhỏ toàn cục một chút cho tinh tế */
+            font-size: 0.95em; 
         }
         
         .theme-switcher { position: absolute; top: 20px; left: 20px; display: flex; gap: 8px; z-index: 10; }
@@ -44,8 +43,8 @@
         .main-wrapper { 
             display: flex; 
             width: 92%; 
-            max-width: 1000px; /* Nới rộng từ 500px lên 1000px */
-            height: 85vh; /* Cố định chiều cao để thanh cuộn hoạt động mượt */
+            max-width: 1000px; 
+            height: 85vh; 
             background: var(--glass-container); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border); 
@@ -55,29 +54,27 @@
             overflow: hidden; 
         }
 
-        /* Gian nhà bên trái: Cố định, chứa nút bấm, tiêu đề, máy phát nhạc */
         .left-panel {
-            flex: 1; /* Tỷ lệ 1 */
+            flex: 1; 
             padding: 40px 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-right: 1px solid var(--glass-border); /* Đường kẻ chia đôi 2 gian */
+            border-right: 1px solid var(--glass-border); 
             position: relative;
         }
 
-        /* Gian nhà bên phải: Rộng hơn, chứa Playlist, có thanh cuộn riêng */
         .right-panel {
-            flex: 1.3; /* Tỷ lệ 1.3 (Rộng hơn bên trái một chút) */
+            flex: 1.3; 
             padding: 30px;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Bắt buộc để thanh cuộn con hoạt động */
+            overflow: hidden; 
         }
 
-        .my-sticker { position: absolute; top: 15px; left: 15px; width: 70px; transform: rotate(-15deg); filter: var(--sticker-filter); transition: filter 0.4s ease; opacity: 0.8;}
+        /* 🌟 ĐÃ XÓA CSS CỦA MY-STICKER TẠI ĐÂY 🌟 */
         
         h1 { font-size: 1.8em; margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); }
         p.subtitle { line-height: 1.4; font-size: 0.9em; margin-bottom: 25px; }
@@ -90,7 +87,6 @@
         .filter-container { width: 100%; margin-bottom: 25px; display: none; }
         .glass-select { width: 100%; padding: 10px 15px; font-size: 0.95em; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; outline: none; cursor: pointer; backdrop-filter: blur(5px); appearance: none; text-align: center; }
         
-        /* Đẩy cái máy nghe nhạc xuống sát đáy của gian bên trái */
         audio { width: 100%; border-radius: 30px; opacity: 0.9; margin-top: auto; }
 
         .playlist-header { font-size: 1.2em; font-weight: 800; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;}
@@ -112,7 +108,6 @@
         .active-song .badge { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
         .active-song .badge.ielts { background: rgba(255, 255, 255, 0.3); border-color: #fff; }
 
-        /* 🌟 RESPONSIVE ĐỈNH CAO: Nếu màn hình nhỏ gọn (Điện thoại), tự gập lại thành 1 cột 🌟 */
         @media (max-width: 768px) {
             .main-wrapper { flex-direction: column; height: 90vh; overflow-y: auto; }
             .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 25px 20px;}
@@ -131,8 +126,6 @@
 
     <div class="main-wrapper">
         <div class="left-panel">
-            <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
-            
             <h1 id="main-title">🎙️ BBC AI Podcast</h1>
             <p id="main-subtitle" class="subtitle">Podcast tự động tổng hợp từ tin tức BBC.</p>
             
@@ -165,7 +158,7 @@
     
     <script>
         // -------------------------------------------------------------
-        // TOÀN BỘ PHẦN NẢO BỘ (JAVASCRIPT) GIỮ NGUYÊN 100% CỦA CHỊ ĐẸP
+        // TOÀN BỘ PHẦN NẢO BỘ (JAVASCRIPT) GIỮ NGUYÊN 100%
         // -------------------------------------------------------------
         function setTheme(themeName) {
             document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
