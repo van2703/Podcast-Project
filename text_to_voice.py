@@ -3,11 +3,10 @@ import glob
 import random
 import asyncio
 import edge_tts
-import json # Thêm thư viện xử lý JSON
+import json
 from datetime import datetime
 from pydub import AudioSegment
 
-# 1. Đổi từ tìm .txt sang tìm .json
 def get_latest_script():
     list_of_files = glob.glob('scripts/*.json') 
     if not list_of_files:
@@ -29,6 +28,11 @@ async def create_voice():
             script_text = json_data.get("script", "")
             podcast_title = json_data.get("title", "BBC Daily News")
             podcast_summary = json_data.get("summary", "Your daily news update.")
+            
+            # 🌟 NEW: Vớt thêm hashtags và ielts_score từ file JSON
+            # Dùng .get([], "") để lỡ AI ngáo quên tạo thì code web của mày không bị crash
+            hashtags = json_data.get("hashtags", [])
+            ielts_score = json_data.get("ielts_score", "")
             
             if not script_text.strip():
                 print("❌ File JSON không có nội dung phần 'script'.")
@@ -53,14 +57,14 @@ async def create_voice():
         # 🌟 BẮT ĐẦU MIX NHẠC NỀN (BACKGROUND MUSIC MIXING) 🌟
         # ---------------------------------------------------------
         current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
-        final_output_path = f"audios/bbc_podcast_{current_time}.wav"
+        final_output_path = f"audios/bbc_podcast_{current_time}.mp3"
         
         music_files = glob.glob("music/*.*") 
         voice_audio = AudioSegment.from_file(temp_mp3_path)
         
         if not music_files:
             print("⚠️ Không tìm thấy nhạc nền. Xuất file thô...")
-            voice_audio.export(final_output_path, format="wav")
+            voice_audio.export(final_output_path, format="mp3")
         else:
             random_bgm_path = random.choice(music_files)
             print(f"🎵 Đã chọn nhạc nền: {random_bgm_path}")
@@ -77,7 +81,7 @@ async def create_voice():
             
             print("🎛️ Đang tiến hành trộn âm thanh (Mixing)...")
             final_mixed_audio = bgm_audio.overlay(voice_audio)
-            final_mixed_audio.export(final_output_path, format="wav")
+            final_mixed_audio.export(final_output_path, format="mp3")
             
         if os.path.exists(temp_mp3_path):
             os.remove(temp_mp3_path)
@@ -90,41 +94,39 @@ async def create_voice():
         config_path = "config.js"
         podcast_list = []
         
-        # Thử đọc dữ liệu cũ để không làm mất các bài podcast hôm trước
         if os.path.exists(config_path):
             try:
                 with open(config_path, "r", encoding="utf-8") as f:
                     content = f.read()
-                    # Cắt chuỗi để lấy phần ruột bên trong dấu ngoặc vuông [...]
                     start_idx = content.find('[')
                     end_idx = content.rfind(']') + 1
                     if start_idx != -1 and end_idx != -1:
                         parsed_list = json.loads(content[start_idx:end_idx])
-                        # Lọc loại bỏ những mảng chuỗi kiểu cũ (['audios/a.wav']) để tránh crash web
                         podcast_list = [item for item in parsed_list if isinstance(item, dict)]
             except Exception as e:
                 print(f"⚠️ Không thể đọc config cũ (có thể sai format), tạo mới hoàn toàn. Lỗi: {e}")
-        # Thêm biến lưu thời gian chuẩn ISO để JavaScript dễ đọc
+                
         current_iso_time = datetime.now().isoformat()
-        # Tạo Object mới cho bài podcast hôm nay
+        
+        # 🌟 NEW: Nhét hashtags và ielts_score vào Object để in ra config.js
         new_podcast_entry = {
             "url": final_output_path.replace('\\', '/'),
             "title": podcast_title,
             "summary": podcast_summary,
-            "timestamp": current_iso_time
+            "timestamp": current_iso_time,
+            "hashtags": hashtags,           # <--- Dữ liệu mới nè chị
+            "ielts_score": ielts_score      # <--- Dữ liệu mới nè chị
         }
         
-        # Nhét bài mới nhất lên đầu danh sách
         podcast_list.insert(0, new_podcast_entry)
 
-        # Ghi đè file config.js với cấu trúc mảng Object chuẩn
         with open(config_path, "w", encoding="utf-8") as f:
             f.write("const PODCAST_LIST = ")
             json.dump(podcast_list, f, indent=4, ensure_ascii=False)
             f.write(";\n")
             f.write(f'const LATEST_PODCAST = "{podcast_list[0]["url"]}";\n')
                 
-        print("🌐 Đã cập nhật file config.js chuẩn Object cho giao diện Spotify!")
+        print("🌐 Đã cập nhật file config.js chuẩn Object cho giao diện!")
         
     except Exception as e:
         print(f"❌ Lỗi: {e}")

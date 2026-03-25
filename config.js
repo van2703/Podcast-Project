@@ -1,5 +1,87 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260325_113415.wav",
+        "title": "Global Turmoil: Economy, Conflict, and Hope",
+        "summary": "The world grapples with economic recession fears and escalating international conflicts, balanced by moments of global unity and heartbreaking loss.",
+        "timestamp": "2026-03-25T11:34:22.778049",
+        "hashtags": [
+            "#GlobalEconomy",
+            "#WorldConflicts",
+            "#PoliticalShift",
+            "#PopCulture",
+            "#BreakingNews"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_111816.wav",
+        "title": "Global Shocks and Unforgettable Moments",
+        "summary": "From economic warnings and global conflicts to political upsets, trade deals, K-Pop sensations, and a heartfelt farewell, we cover the week's biggest stories.",
+        "timestamp": "2026-03-25T11:18:22.793148",
+        "hashtags": [
+            "#GlobalEconomy",
+            "#WorldNews",
+            "#PopCulture",
+            "#Politics",
+            "#Conflict"
+        ],
+        "ielts_score": ""
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_105828.wav",
+        "title": "Global Tremors: Oil, War, and Shifting Sands",
+        "summary": "From the brink of economic devastation to geopolitical upheavals and unexpected cultural triumphs, this week's news unfurls a tapestry of global disquiet and profound human stories.",
+        "timestamp": "2026-03-25T10:58:35.797722"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_101623.wav",
+        "title": "Global Oil Fears and Shifting World Powers",
+        "summary": "A financial giant warns of global recession if oil hits $150, while international conflicts change and new trade deals are made amidst global uncertainty.",
+        "timestamp": "2026-03-25T10:16:34.463598"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_095033.wav",
+        "title": "Global Oil Fears and Shifting World Powers",
+        "summary": "A financial giant warns of global recession if oil hits $150, while international conflicts change and new trade deals are made amidst global uncertainty.",
+        "timestamp": "2026-03-25T09:50:38.432816"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_094434.wav",
+        "title": "Global Oil Fears and Shifting World Powers",
+        "summary": "A financial giant warns of global recession if oil hits $150, while international conflicts change and new trade deals are made amidst global uncertainty.",
+        "timestamp": "2026-03-25T09:44:39.762228"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_094122.wav",
+        "title": "Global Oil Fears and Shifting World Powers",
+        "summary": "A financial giant warns of global recession if oil hits $150, while international conflicts change and new trade deals are made amidst global uncertainty.",
+        "timestamp": "2026-03-25T09:41:27.816892"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_092013.wav",
+        "title": "Global Oil Fears and Shifting World Powers",
+        "summary": "A financial giant warns of global recession if oil hits $150, while international conflicts change and new trade deals are made amidst global uncertainty.",
+        "timestamp": "2026-03-25T09:20:21.383475"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_091542.wav",
+        "title": "World News: Oil, Conflicts, Crashes, and Deals",
+        "summary": "Today, we look at global oil price warnings, changing conflict rules, a plane crash investigation, a massive drone attack, and new trade agreements.",
+        "timestamp": "2026-03-25T09:15:45.194631"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_091337.wav",
+        "title": "World News: Oil, Conflicts, Crashes, and Deals",
+        "summary": "Today, we look at global oil price warnings, changing conflict rules, a plane crash investigation, a massive drone attack, and new trade agreements.",
+        "timestamp": "2026-03-25T09:13:40.710366"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_090810.wav",
+        "title": "World News: Oil, Conflicts, Crashes, and Deals",
+        "summary": "Today, we look at global oil price warnings, changing conflict rules, a plane crash investigation, a massive drone attack, and new trade agreements.",
+        "timestamp": "2026-03-25T09:08:13.386943"
+    },
+    {
         "url": "audios/bbc_podcast_20260325_062229.wav",
         "title": "Global News: Conflicts, Deals, and Tragedies",
         "summary": "Today we cover major drone attacks in Ukraine, shifting global conflict rules, a tragic plane crash, and a big trade deal between Australia and the EU.",
@@ -12,22 +94,10 @@ const PODCAST_LIST = [
         "timestamp": "2026-03-24T16:55:40.843478"
     },
     {
-        "url": "audios/bbc_podcast_20260324_165228.mp3",
-        "title": "Global Currents: Vets, AI, and Geopolitical Shocks",
-        "summary": "From consumer protection and tech ethics to geopolitical tremors and aviation tragedies, we navigate the week's most compelling global narratives.",
-        "timestamp": "2026-03-24T16:52:38.344791"
-    },
-    {
         "url": "audios/bbc_podcast_20260324_165037.mp3",
         "title": "From Vet Relief to Global Turmoil: Unpacking Today's Headlines",
         "summary": "We delve into vital consumer protections, startling corporate misconduct, significant tech shifts, and the ripple effects of global conflicts, alongside some truly bizarre international incidents.",
         "timestamp": "2026-03-24T16:50:45.052327"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_164157.mp3",
-        "title": "From Vet Relief to Global Turmoil: Unpacking Today's Headlines",
-        "summary": "We delve into vital consumer protections, startling corporate misconduct, significant tech shifts, and the ripple effects of global conflicts, alongside some truly bizarre international incidents.",
-        "timestamp": "2026-03-24T16:42:09.827639"
     },
     {
         "url": "audios/bbc_podcast_20260324_162842.mp3",
@@ -36,28 +106,10 @@ const PODCAST_LIST = [
         "timestamp": "2026-03-24T16:29:21.137299"
     },
     {
-        "url": "audios/bbc_podcast_20260324_160438.mp3",
-        "title": "Global News: Diplomacy, Crashes, and Justice",
-        "summary": "Today, we cover international talks, plane crash investigations, protests, trade deals, fuel prices, and a major court ruling.",
-        "timestamp": "2026-03-24T16:05:13.381885"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_154422.mp3",
-        "title": "Global News: Diplomacy, Crashes, and Justice",
-        "summary": "Today, we cover international talks, plane crash investigations, protests, trade deals, fuel prices, and a major court ruling.",
-        "timestamp": "2026-03-24T15:44:50.740366"
-    },
-    {
         "url": "audios/bbc_podcast_20260324_143841.wav",
         "title": "Global Headlines: Diplomacy, Crashes, and Justice",
         "summary": "This podcast covers global diplomacy, tragic plane crashes, economic moves, and a major legal ruling affecting a famous personality.",
         "timestamp": "2026-03-24T14:38:46.360839"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_143303.wav",
-        "title": "Global Headlines: From Diplomacy to Tragic Accidents",
-        "summary": "Today we look at US President Trump's varied activities, tragic plane crashes, an alleged Russian plot in Angola, fuel price changes, trade deals, and a major legal verdict.",
-        "timestamp": "2026-03-24T14:33:12.478828"
     },
     {
         "url": "audios/bbc_podcast_20260324_142416.wav",
@@ -88,71 +140,6 @@ const PODCAST_LIST = [
         "title": "Global News: Crashes, Politics, and Diplomacy",
         "summary": "Today, we cover tragic plane crashes, political trials and challenges, and the varied activities of the US president during wartime.",
         "timestamp": "2026-03-24T13:47:55.439102"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_132732.wav",
-        "title": "Global Update: Crashes, Votes, and Trials",
-        "summary": "Today's news covers plane crashes in New York and Colombia, political challenges in Italy and Angola, and the US President's mixed activities.",
-        "timestamp": "2026-03-24T13:27:35.689053"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_124900.wav",
-        "title": "Global News: Crashes, Protests, and Political Shifts",
-        "summary": "We cover tragic plane crashes, accusations of stirring protests in Angola, and political challenges in Italy and the US.",
-        "timestamp": "2026-03-24T12:49:02.246589"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_113042.wav",
-        "title": "World News: Crashes, Politics, and Presidential Mix",
-        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
-        "timestamp": "2026-03-24T11:30:45.284122"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_111827.wav",
-        "title": "World News: Crashes, Politics, and Presidential Mix",
-        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
-        "timestamp": "2026-03-24T11:18:29.970453"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_105754.wav",
-        "title": "World News: Crashes, Politics, and Presidential Mix",
-        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
-        "timestamp": "2026-03-24T10:57:56.645744"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_105643.wav",
-        "title": "World News: Crashes, Politics, and Presidential Mix",
-        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president.",
-        "timestamp": "2026-03-24T10:56:45.556190"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_104757.wav",
-        "title": "World News: Crashes, Politics, and Presidential Mix",
-        "summary": "Today we cover tragic plane crashes, political trials in Angola, Italy's referendum setback, and the varied activities of the US president."
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_104151.wav",
-        "title": "World News Update: Plane Crashes, Protests, and Political Votes",
-        "summary": "Today, we cover a range of global events, from plane crashes and political setbacks to international diplomacy and legal trials. Join us for a simple look at the latest headlines."
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_103749.wav",
-        "title": "Global Events: Diplomacy, Tragedies, and Political Challenges",
-        "summary": "We cover the US President's diplomacy, two recent plane crashes, a trial in Angola, and political challenges in Italy. Join us for a simple look at the world's most important headlines."
-    },
-    {
-        "url": "audios/bbc_podcast_20260323_232324.wav",
-        "title": "Global Headlines: War, Crashes, Politics, and Fuel Limits",
-        "summary": "We're looking at the human cost of war, a plane crash investigation, political upsets in Italy, and new fuel rules in Slovenia. Good news on talks to end war also brought market changes."
-    },
-    {
-        "url": "audios/bbc_podcast_20260323_171552.wav",
-        "title": "Peace Talks, Climate Fears, and New Rules Explained",
-        "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
     }
 ];
-<<<<<<< HEAD
-const LATEST_PODCAST = "audios/bbc_podcast_20260325_083425.wav";
-=======
-const LATEST_PODCAST = "audios/bbc_podcast_20260325_062229.wav";
->>>>>>> d75d0ec04d260f95f66faaa114fe14f6b0b0baee
+const LATEST_PODCAST = "audios/bbc_podcast_20260325_113415.wav";

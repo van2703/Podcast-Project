@@ -44,7 +44,7 @@ def download_bbc_news():
 
     # 4. Lưu 5 bài mới nhất
     print(f"📥 Bắt đầu copy bài báo về máy...")
-    for i, entry in enumerate(feed.entries[:5]):
+    for i, entry in enumerate(feed.entries[:8]):
         # Lấy tiêu đề và biến nó thành chuỗi (string) thuần túy
         title_str = str(entry.title)
         
