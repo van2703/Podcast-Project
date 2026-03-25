@@ -1,116 +1,82 @@
 import os
 import json
-import time
+import re
 from datetime import datetime
-from google import genai
-from google.genai import types
-from dotenv import load_dotenv
 
-load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
-# Cấu hình thư mục riêng cho Mode Vietnamlove
 DATA_NOVEL_FOLDER = "data_novel"
 SCRIPTS_NOVEL_FOLDER = "scripts_novel"
 
 if not os.path.exists(SCRIPTS_NOVEL_FOLDER):
     os.makedirs(SCRIPTS_NOVEL_FOLDER)
 
-# ---------------------------------------------------------
-# 🛠️ HÀM: GỌI AI VIẾT KỊCH BẢN TỪ FILE TEXT
-# ---------------------------------------------------------
-def generate_episode_script(novel_text, filename):
-    print(f"🧠 Đang gọi Gemini biến hóa file '{filename}' thành kịch bản MC...")
+def process_novels():
+    print(f"📂 Đang quét kho truyện chạy bằng cơm trong '{DATA_NOVEL_FOLDER}'...")
     
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    
-    prompt = f"""
-    Bạn là một MC Podcast kể chuyện đêm khuya người Việt Nam, giọng điệu cực kỳ duyên dáng, lôi cuốn và truyền cảm.
-    Dưới đây là nội dung của một tập/chương truyện.
-    
-    NHIỆM VỤ:
-    Hãy chuyển thể phần truyện này thành một kịch bản Podcast dài khoảng 700 - 1000 chữ.
-    
-    LUẬT:
-    1. Giọng điệu: Đậm chất Việt Nam, lôi cuốn, có cảm xúc (vui, buồn, drama, hồi hộp). KHÔNG dùng từ ngữ khô khan, máy móc hay học thuật.
-    2. Nhập vai: Mở đầu bằng lời chào thính giả thân mật, dẫn dắt nhẹ nhàng vào không gian câu chuyện và kể lại diễn biến một cách sinh động.
-    3. Kết thúc: Kết thúc bằng một câu mồi nhử gây tò mò cho tập sau, hoặc một lời chào tạm biệt đầy cảm xúc.
-    4. Cốt truyện: Chỉ dựa vào nội dung truyện được cấp, bám sát tâm lý nhân vật, tuyệt đối không bịa thêm tình tiết lạ.
-    
-    BẮT BUỘC TRẢ VỀ CHUẨN JSON VỚI CẤU TRÚC SAU:
-    {{
-        "title": "Tên tập truyện giật gân (khoảng 7-10 chữ)",
-        "summary": "Tóm tắt mồi nhử cực ngắn (1 câu)",
-        "hashtags": ["#KeChuyen", "#Drama", "#AudioTruyen"],
-        "script": "Toàn bộ lời thoại của MC bằng TIẾNG VIỆT ở đây (chỉ lời nói, không có thẻ [Nhạc])."
-    }}
-
-    NỘI DUNG TẬP NÀY:
-    {novel_text}
-    """
-    
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-            )
-        )
-        return json.loads(response.text)
-    except Exception as e:
-        print(f"❌ Lỗi AI khi xử lý file {filename}: {e}")
-        return None
-
-# ---------------------------------------------------------
-# 🚀 HÀM CHÍNH (MAIN WORKFLOW)
-# ---------------------------------------------------------
-def create_novel_scripts():
-    print(f"📂 Đang quét truyện trong folder '{DATA_NOVEL_FOLDER}'...")
-    
-    # Lấy danh sách TẤT CẢ các file .txt trong thư mục
-    novel_files = [f for f in os.listdir(DATA_NOVEL_FOLDER) if f.endswith(".txt")]
-    
-    if not novel_files:
-        print(f"❌ Chưa có file .txt nào trong '{DATA_NOVEL_FOLDER}'. Chị ném truyện vào nhé!")
-        return
+    for story_folder in os.listdir(DATA_NOVEL_FOLDER):
+        folder_path = os.path.join(DATA_NOVEL_FOLDER, story_folder)
         
-    print(f"📚 Tìm thấy {len(novel_files)} file truyện. Bắt đầu lên đồ...")
-
-    # Vòng lặp: Xử lý từng file một
-    for index, filename in enumerate(novel_files, 1):
-        target_file = os.path.join(DATA_NOVEL_FOLDER, filename)
-        print(f"\n--- BẮT ĐẦU XỬ LÝ FILE: {filename} ---")
-        
-        with open(target_file, "r", encoding="utf-8") as f:
-            full_text = f.read()
-            
-        if not full_text.strip():
-            print(f"⚠️ File {filename} rỗng không có chữ nào, bỏ qua!")
+        if not os.path.isdir(folder_path):
             continue
-
-        # Ném nguyên cục text của file đó cho AI xử
-        json_data = generate_episode_script(full_text, filename)
+            
+        meta_path = os.path.join(folder_path, "meta.json")
+        if not os.path.exists(meta_path):
+            print(f"⚠️ Thư mục '{story_folder}' thiếu file meta.json. Bỏ qua!")
+            continue
+            
+        with open(meta_path, "r", encoding="utf-8") as f:
+            try:
+                meta_data = json.load(f)
+                ten_truyen = meta_data.get("name", "Truyện Ẩn Danh")
+                tac_gia = meta_data.get("author", "Đang cập nhật")
+                hashtags = meta_data.get("hashtags", ["#KeChuyenDemKhuya"])
+            except Exception as e:
+                print(f"❌ Lỗi đọc meta.json của '{story_folder}': {e}")
+                continue
+                
+        print(f"\n📚 Bắt đầu xử lý bộ: {ten_truyen} (Tác giả: {tac_gia})")
         
-        if json_data:
+        for filename in os.listdir(folder_path):
+            # 🌟 CHỈ XỬ LÝ NHỮNG FILE CÒN ĐUÔI .txt (Những file .txt.done sẽ bị bỏ qua)
+            if not filename.endswith(".txt"):
+                continue
+                
+            txt_path = os.path.join(folder_path, filename)
+            match = re.search(r'\d+', filename)
+            so_chuong = match.group() if match else "X"
+            
+            with open(txt_path, "r", encoding="utf-8") as f:
+                noi_dung_truyen = f.read().strip()
+                
+            if not noi_dung_truyen:
+                print(f"⚠️ File {filename} rỗng, bỏ qua!")
+                continue
+                
+            mo_dau = f"Xin chào các bé ngoan, lên giường mở podcast lên và nhắm mắt nghe chồng kể chuyện nha. Hôm nay chồng sẽ đọc cho các vợ nghe truyện {ten_truyen} của tác giả {tac_gia} chương {so_chuong}."
+            ket_thuc = "Vậy là đã hết nội dung chương này rồi đó các vợ. Chúc các vợ ngủ ngoan nhé, anh yêu tất cả các em. Lovely Meo Meo."
+            
+            kich_ban_hoan_chinh = f"{mo_dau}\n\n{noi_dung_truyen}\n\n{ket_thuc}"
+            
+            final_title = f"{ten_truyen} - Chương {so_chuong}"
+            json_data = {
+                "story_id": story_folder,
+                "title": final_title,
+                "summary": f"Cùng nhắm mắt và lắng nghe chương {so_chuong} của bộ truyện {ten_truyen}.",
+                "hashtags": hashtags,
+                "script": kich_ban_hoan_chinh
+            }
+            
             current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
-            # Tách tên file gốc (KTCVE_chap1) ra khỏi đuôi (.txt) để đặt tên cho file JSON
             base_name = os.path.splitext(filename)[0]
-            output_filename = f"{SCRIPTS_NOVEL_FOLDER}/{base_name}_{current_time}.json"
+            output_filename = f"{SCRIPTS_NOVEL_FOLDER}/{story_folder}_{base_name}_{current_time}.json"
             
             with open(output_filename, "w", encoding="utf-8") as f:
                 json.dump(json_data, f, indent=4, ensure_ascii=False)
                 
-            print(f"✅ Đã đóng gói kịch bản thành công vào: '{output_filename}'")
-            print(f"🎙️ Tiêu đề: {json_data.get('title')}")
-            print(f"🏷️ Hashtags: {', '.join(json_data.get('hashtags', []))}")
+            print(f"✅ Đã lên khuôn thành công: '{final_title}' -> {output_filename}")
             
-        # ⚠️ Nhịp nghỉ 5 giây giữa các file (nếu còn file tiếp theo)
-        if index < len(novel_files):
-            print(f"⏳ Đang cho AI nghỉ mệt 5 giây trước khi nấu file tiếp theo...")
-            time.sleep(5)
-            
-    print("\n🎉 XUẤT SẮC! ĐÃ DỌN SẠCH KHO TRUYỆN!")
+            # 🌟 CÚ FIX ĂN TIỀN: Đổi đuôi file để đánh dấu "ĐÃ XỬ LÝ XONG"
+            os.rename(txt_path, txt_path + ".done")
+            print(f"🔒 Đã khóa file gốc thành: {filename}.done")
 
 if __name__ == "__main__":
-    create_novel_scripts()
+    process_novels()

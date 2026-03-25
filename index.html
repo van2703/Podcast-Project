@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBC Daily Podcast & Truyện Đêm Khuya</title>
     <style>
-        /* 🌟 BƯỚC 1: BIẾN CSS TRONG SUỐT (GLASSMORPHISM) 🌟 */
+        /* 🌟 BƯỚC 1: BIẾN CSS TRONG SUỐT VÀ THEME 🌟 */
         :root {
             --bg-image: url('background.jpg');
-            
-            /* Theme Pinky */
             --glass-container: rgba(255, 240, 245, 0.45); 
             --glass-border: rgba(255, 255, 255, 0.6);
             --text-main: #713651;
@@ -22,244 +20,269 @@
             --sticker-filter: none;
         }
 
-        body.theme-greeny {
-            --glass-container: rgba(232, 245, 233, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --text-main: #1b5e20;
-            --text-sub: #388e3c;
-            --card-bg: rgba(255, 255, 255, 0.5);
-            --card-hover: rgba(255, 255, 255, 0.8);
-            --active-bg: #5bb35eb5;
-            --active-text: #ffffff;
-            --meta-text: #66bb6a;
-        }
+        body.theme-greeny { --glass-container: rgba(232, 245, 233, 0.45); --glass-border: rgba(255, 255, 255, 0.5); --text-main: #1b5e20; --text-sub: #388e3c; --active-bg: #5bb35eb5; --meta-text: #66bb6a; }
+        body.theme-bluebaby { --glass-container: rgba(227, 242, 253, 0.45); --glass-border: rgba(255, 255, 255, 0.5); --text-main: #0d47a1; --text-sub: #1976d2; --active-bg: #5d9fd4; --meta-text: #42a5f5; }
+        body.theme-blackwhite { --glass-container: rgba(20, 20, 20, 0.65); --glass-border: rgba(255, 255, 255, 0.1); --text-main: #f0f0f0; --text-sub: #aaaaaa; --card-bg: rgba(50, 50, 50, 0.6); --card-hover: rgba(60, 60, 60, 0.8); --active-bg: #e2e2e2; --active-text: #000000; --meta-text: #888888; }
 
-        body.theme-bluebaby {
-            --glass-container: rgba(227, 242, 253, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --text-main: #0d47a1;
-            --text-sub: #1976d2;
-            --card-bg: rgba(255, 255, 255, 0.5);
-            --card-hover: rgba(255, 255, 255, 0.8);
-            --active-bg: #5d9fd4;
-            --active-text: #ffffff;
-            --meta-text: #42a5f5;
-        }
-
-        body.theme-blackwhite {
-            --glass-container: rgba(20, 20, 20, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #f0f0f0;
-            --text-sub: #aaaaaa;
-            --card-bg: rgba(50, 50, 50, 0.6);
-            --card-hover: rgba(60, 60, 60, 0.8);
-            --active-bg: #e2e2e2;
-            --active-text: #000000;
-            --meta-text: #888888;
-        }
-
-        /* 🌟 BƯỚC 2: ỐP ẢNH NỀN VÀ KHUNG CHỨA 🌟 */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            color: var(--text-main);
-            background-image: var(--bg-image);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            transition: all 0.4s ease;
+        /* 🌟 BƯỚC 2: CĂN BẢN VÀ THU NHỎ FONT CHỮ 🌟 */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; align-items: center; justify-content: center; 
+            height: 100vh; margin: 0; 
+            color: var(--text-main); background-image: var(--bg-image); 
+            background-size: cover; background-position: center; background-attachment: fixed; 
+            transition: all 0.4s ease; 
+            font-size: 0.95em; /* Đã thu nhỏ toàn cục một chút cho tinh tế */
         }
         
-        .theme-switcher { position: absolute; top: 15px; left: 20px; display: flex; gap: 8px; z-index: 10; }
-        .theme-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .theme-switcher { position: absolute; top: 20px; left: 20px; display: flex; gap: 8px; z-index: 10; }
+        .theme-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); cursor: pointer; transition: transform 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .theme-btn:hover { transform: scale(1.2); }
         .btn-pinky { background-color: #ffb6c1; } .btn-greeny { background-color: #a5d6a7; } .btn-bluebaby { background-color: #90caf9; } .btn-blackwhite { background-color: #424242; }
 
-        .container { background: var(--glass-container); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); padding: 40px 30px 30px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); text-align: center; width: 90%; max-width: 500px; position: relative; transition: all 0.4s ease; }
-        .my-sticker { position: absolute; top: -35px; right: -15px; width: 85px; transform: rotate(15deg); filter: var(--sticker-filter); transition: filter 0.4s ease; }
-        h1 { color: var(--text-main); margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); transition: color 0.3s; }
-        p.subtitle { color: var(--text-sub); line-height: 1.5; font-size: 0.9em; margin-bottom: 25px; transition: color 0.3s; }
+        /* 🌟 BƯỚC 3: CUỘC CÁCH MẠNG KIẾN TRÚC 2 CỘT 🌟 */
+        .main-wrapper { 
+            display: flex; 
+            width: 92%; 
+            max-width: 1000px; /* Nới rộng từ 500px lên 1000px */
+            height: 85vh; /* Cố định chiều cao để thanh cuộn hoạt động mượt */
+            background: var(--glass-container); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); 
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        /* Gian nhà bên trái: Cố định, chứa nút bấm, tiêu đề, máy phát nhạc */
+        .left-panel {
+            flex: 1; /* Tỷ lệ 1 */
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--glass-border); /* Đường kẻ chia đôi 2 gian */
+            position: relative;
+        }
+
+        /* Gian nhà bên phải: Rộng hơn, chứa Playlist, có thanh cuộn riêng */
+        .right-panel {
+            flex: 1.3; /* Tỷ lệ 1.3 (Rộng hơn bên trái một chút) */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Bắt buộc để thanh cuộn con hoạt động */
+        }
+
+        .my-sticker { position: absolute; top: 15px; left: 15px; width: 70px; transform: rotate(-15deg); filter: var(--sticker-filter); transition: filter 0.4s ease; opacity: 0.8;}
         
-        /* 🌟 CSS CHO 2 NÚT CHUYỂN MODE 🌟 */
-        .mode-switch { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .mode-btn { background: rgba(255, 255, 255, 0.3); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 18px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        h1 { font-size: 1.8em; margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); }
+        p.subtitle { line-height: 1.4; font-size: 0.9em; margin-bottom: 25px; }
+        
+        .mode-switch { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; width: 100%;}
+        .mode-btn { flex: 1; background: rgba(255, 255, 255, 0.3); border: 1px solid var(--glass-border); color: var(--text-main); padding: 10px 10px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); font-size: 0.9em;}
         .mode-btn:hover { background: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
         .mode-btn.active { background: var(--active-bg); color: var(--active-text); box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-color: transparent; }
 
-        audio { width: 100%; margin-bottom: 20px; border-radius: 30px; opacity: 0.9; }
+        .filter-container { width: 100%; margin-bottom: 25px; display: none; }
+        .glass-select { width: 100%; padding: 10px 15px; font-size: 0.95em; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; outline: none; cursor: pointer; backdrop-filter: blur(5px); appearance: none; text-align: center; }
+        
+        /* Đẩy cái máy nghe nhạc xuống sát đáy của gian bên trái */
+        audio { width: 100%; border-radius: 30px; opacity: 0.9; margin-top: auto; }
 
-        .playlist { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 5px; text-align: left; }
+        .playlist-header { font-size: 1.2em; font-weight: 800; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;}
+        
+        .playlist { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 10px; text-align: left; }
         .playlist::-webkit-scrollbar { width: 6px; }
         .playlist::-webkit-scrollbar-thumb { background: var(--active-bg); border-radius: 10px; }
 
-        .track-card { background-color: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .track-card { background-color: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; cursor: pointer; transition: all 0.3s ease; }
         .track-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .active-song { background-color: var(--active-bg); color: var(--active-text); border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .active-song .track-meta, .active-song .track-summary { color: var(--active-text); opacity: 0.9; }
-        
+        .active-song .track-meta, .active-song .track-summary, .active-song .badge { color: var(--active-text); opacity: 0.9; }
         .track-title { font-weight: bold; font-size: 1.05em; margin-bottom: 4px; }
-        .track-meta { font-size: 0.75em; color: var(--meta-text); margin-bottom: 8px; font-style: italic; }
-        .track-summary { font-size: 0.85em; color: var(--text-main); opacity: 0.8; line-height: 1.3; }
-
+        .track-meta { font-size: 0.75em; margin-bottom: 8px; font-style: italic; }
+        .track-summary { font-size: 0.85em; opacity: 0.8; line-height: 1.3; }
         .tags-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-        .badge { padding: 4px 10px; font-size: 0.75em; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .badge:hover { transform: translateY(-2px); }
+        .badge { padding: 4px 10px; font-size: 0.75em; font-weight: 600; background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .badge.ielts { border-color: var(--active-bg); color: var(--active-bg); background: rgba(255, 255, 255, 0.6); }
-        .active-song .badge { background: rgba(255, 255, 255, 0.2); color: var(--active-text); border-color: rgba(255, 255, 255, 0.4); }
+        .active-song .badge { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
         .active-song .badge.ielts { background: rgba(255, 255, 255, 0.3); border-color: #fff; }
+
+        /* 🌟 RESPONSIVE ĐỈNH CAO: Nếu màn hình nhỏ gọn (Điện thoại), tự gập lại thành 1 cột 🌟 */
+        @media (max-width: 768px) {
+            .main-wrapper { flex-direction: column; height: 90vh; overflow-y: auto; }
+            .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 25px 20px;}
+            .right-panel { overflow: visible; padding: 20px;}
+            .playlist { overflow-y: visible; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="theme-switcher">
-            <button class="theme-btn btn-pinky" onclick="setTheme('pinky')" title="Pinky"></button>
-            <button class="theme-btn btn-greeny" onclick="setTheme('greeny')" title="Greeny"></button>
-            <button class="theme-btn btn-bluebaby" onclick="setTheme('bluebaby')" title="Blue Baby"></button>
-            <button class="theme-btn btn-blackwhite" onclick="setTheme('blackwhite')" title="Dark Mode"></button>
-        </div>
-
-        <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
-        
-        <h1 id="main-title">🎙️ BBC AI Daily</h1>
-        <p id="main-subtitle" class="subtitle">This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely meo meo</p>
-        
-        <div class="mode-switch">
-            <button id="btn-news" class="mode-btn active" onclick="switchMode('news')">Engrisk News</button>
-            <button id="btn-novel" class="mode-btn" onclick="switchMode('novel')">Vietnamlove</button>
-        </div>
-
-        <audio id="podcastPlayer" controls>
-            <source id="audioSource" src="">
-        </audio>
-
-        <div class="playlist" id="playlistContainer"></div>
-
-        <script src="config.js"></script>
-        <script src="config_novel.js"></script>
-        
-        <script>
-            function setTheme(themeName) {
-                document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
-                if (themeName !== 'pinky') {
-                    document.body.classList.add('theme-' + themeName);
-                }
-                localStorage.setItem('selectedTheme', themeName);
-            }
-            const savedTheme = localStorage.getItem('selectedTheme') || 'pinky';
-            setTheme(savedTheme);
-
-            function timeAgo(dateString) {
-                if (!dateString) return "";
-                const diffMs = new Date() - new Date(dateString); 
-                const diffMins = Math.round(diffMs / 60000);
-                const diffHours = Math.round(diffMs / 3600000);
-                const diffDays = Math.round(diffMs / 86400000);
-
-                if (diffMins < 1) return "Vừa xong";
-                if (diffMins < 60) return `${diffMins} phút trước`;
-                if (diffHours < 24) return `${diffHours} giờ trước`;
-                return `${diffDays} ngày trước`;
-            }
-
-            // 🌟 HÀM RENDER CHUNG CHO CẢ 2 MODE (CODE CŨ CỦA MÀY ĐƯỢC BỌC LẠI) 🌟
-            function renderPlaylist(dataArray, latestAudioUrl) {
-                let player = document.getElementById("podcastPlayer");
-                let source = document.getElementById("audioSource");
-                let container = document.getElementById("playlistContainer");
-                
-                // Dọn sạch danh sách cũ trước khi nhét bài mới vào
-                container.innerHTML = ""; 
-
-                if (!dataArray || dataArray.length === 0) {
-                    container.innerHTML = "<p style='text-align:center;'>Đang cập nhật nội dung...</p>";
-                    source.src = "";
-                    player.load();
-                    return;
-                }
-
-                // Load bài mới nhất lên Audio Player
-                source.src = latestAudioUrl;
-                player.load();
-
-                dataArray.forEach((track, index) => {
-                    let card = document.createElement("div");
-                    card.className = "track-card";
-                    if (index === 0) card.classList.add("active-song");
-
-                    let dateStr = "";
-                    let timeAgoStr = "";
-                    if (track.timestamp) {
-                        const dateObj = new Date(track.timestamp);
-                        dateStr = dateObj.toLocaleDateString('vi-VN'); 
-                        timeAgoStr = timeAgo(track.timestamp);
-                    }
-
-                    let tagsHtml = "";
-                    // Nếu là mode News có IELTS thì in ra
-                    if (track.ielts_score) {
-                        tagsHtml += `<span class="badge ielts">🎯 IELTS: ${track.ielts_score}</span>`;
-                    }
-                    if (track.hashtags && Array.isArray(track.hashtags)) {
-                        track.hashtags.forEach(tag => {
-                            tagsHtml += `<span class="badge">${tag}</span>`;
-                        });
-                    }
-                    let tagsContainerHtml = tagsHtml !== "" ? `<div class="tags-container">${tagsHtml}</div>` : "";
-
-                    card.innerHTML = `
-                        <div class="track-title">🎧 ${track.title}</div>
-                        ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} • ⏳ ${timeAgoStr}</div>` : ''}
-                        ${tagsContainerHtml}
-                        <div class="track-summary">${track.summary}</div>
-                    `;
-
-                    card.onclick = function() {
-                        source.src = track.url;
-                        player.load();
-                        player.play();
-                        document.querySelectorAll('.track-card').forEach(b => b.classList.remove('active-song'));
-                        this.classList.add('active-song');
-                    };
-                    container.appendChild(card);
-                });
-            }
-
-            // 🌟 LOGIC CHUYỂN ĐỔI TAB 🌟
-            function switchMode(mode) {
-                // Đổi class Active cho nút bấm (để nút sáng lên)
-                document.getElementById('btn-news').classList.toggle('active', mode === 'news');
-                document.getElementById('btn-novel').classList.toggle('active', mode === 'novel');
-
-                const titleEl = document.getElementById('main-title');
-                const subEl = document.getElementById('main-subtitle');
-
-                if (mode === 'news') {
-                    // Cập nhật text Tiêu đề
-                    titleEl.innerHTML = "🎙️ BBC AI Daily";
-                    subEl.innerHTML = "This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely meo meo";
-                    
-                    // Gọi data từ config.js (PODCAST_LIST)
-                    renderPlaylist(typeof PODCAST_LIST !== 'undefined' ? PODCAST_LIST : [], 
-                                   typeof LATEST_PODCAST !== 'undefined' ? LATEST_PODCAST : "");
-                } else {
-                    // Cập nhật text Tiêu đề cho Mode Truyện
-                    titleEl.innerHTML = "🌙 Chúc Bé Ngủ Ngoan";
-                    subEl.innerHTML = "Nhắm mắt lại và để AI thủ thỉ cho bạn nghe những câu chuyện lôi cuốn nhất.<br>Powered by Lovely meo meo";
-                    
-                    // Gọi data từ config_novel.js (NOVEL_LIST)
-                    renderPlaylist(typeof NOVEL_LIST !== 'undefined' ? NOVEL_LIST : [], 
-                                   typeof LATEST_NOVEL !== 'undefined' ? LATEST_NOVEL : "");
-                }
-            }
-
-            // Kích hoạt mặc định là Tab Engrisk News lúc vừa vào trang
-            switchMode('news');
-        </script>
+    <div class="theme-switcher">
+        <button class="theme-btn btn-pinky" onclick="setTheme('pinky')"></button>
+        <button class="theme-btn btn-greeny" onclick="setTheme('greeny')"></button>
+        <button class="theme-btn btn-bluebaby" onclick="setTheme('bluebaby')"></button>
+        <button class="theme-btn btn-blackwhite" onclick="setTheme('blackwhite')"></button>
     </div>
+
+    <div class="main-wrapper">
+        <div class="left-panel">
+            <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
+            
+            <h1 id="main-title">🎙️ BBC AI Podcast</h1>
+            <p id="main-subtitle" class="subtitle">Podcast tự động tổng hợp từ tin tức BBC.</p>
+            
+            <div class="mode-switch">
+                <button id="btn-news" class="mode-btn active" onclick="switchMode('news')">Engrisk</button>
+                <button id="btn-novel" class="mode-btn" onclick="switchMode('novel')">Vietnamlove</button>
+            </div>
+
+            <div id="filter-container" class="filter-container">
+                <select id="story-filter" class="glass-select" onchange="applyFilter()">
+                    <option value="all">📚 Hiển thị Tất cả Truyện</option>
+                </select>
+            </div>
+
+            <audio id="podcastPlayer" controls>
+                <source id="audioSource" src="">
+            </audio>
+        </div>
+
+        <div class="right-panel">
+            <div class="playlist-header">
+                <span id="playlist-title">🎧 Danh sách phát</span>
+            </div>
+            <div class="playlist" id="playlistContainer"></div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="config_novel.js"></script>
+    
+    <script>
+        // -------------------------------------------------------------
+        // TOÀN BỘ PHẦN NẢO BỘ (JAVASCRIPT) GIỮ NGUYÊN 100% CỦA CHỊ ĐẸP
+        // -------------------------------------------------------------
+        function setTheme(themeName) {
+            document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
+            if (themeName !== 'pinky') document.body.classList.add('theme-' + themeName);
+            localStorage.setItem('selectedTheme', themeName);
+        }
+        setTheme(localStorage.getItem('selectedTheme') || 'pinky');
+
+        function timeAgo(dateString) {
+            if (!dateString) return "";
+            const diffMins = Math.round((new Date() - new Date(dateString)) / 60000);
+            if (diffMins < 1) return "Vừa xong";
+            if (diffMins < 60) return `${diffMins} phút trước`;
+            if (diffMins < 1440) return `${Math.round(diffMins / 60)} giờ trước`;
+            return `${Math.round(diffMins / 1440)} ngày trước`;
+        }
+
+        function renderPlaylist(dataArray, latestAudioUrl) {
+            let player = document.getElementById("podcastPlayer");
+            let source = document.getElementById("audioSource");
+            let container = document.getElementById("playlistContainer");
+            container.innerHTML = ""; 
+
+            if (!dataArray || dataArray.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>Chưa có bài nào...</p>";
+                source.src = "";
+                player.load();
+                return;
+            }
+
+            source.src = latestAudioUrl;
+            player.load();
+
+            dataArray.forEach((track, index) => {
+                let card = document.createElement("div");
+                card.className = "track-card";
+                if (index === 0) card.classList.add("active-song");
+
+                let dateStr = track.timestamp ? new Date(track.timestamp).toLocaleDateString('vi-VN') : "";
+                let timeAgoStr = track.timestamp ? timeAgo(track.timestamp) : "";
+
+                let tagsHtml = "";
+                if (track.ielts_score) tagsHtml += `<span class="badge ielts">🎯 IELTS: ${track.ielts_score}</span>`;
+                if (track.hashtags && Array.isArray(track.hashtags)) {
+                    track.hashtags.forEach(tag => tagsHtml += `<span class="badge">${tag}</span>`);
+                }
+                let tagsContainerHtml = tagsHtml !== "" ? `<div class="tags-container">${tagsHtml}</div>` : "";
+
+                card.innerHTML = `
+                    <div class="track-title">🎧 ${track.title}</div>
+                    ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} • ⏳ ${timeAgoStr}</div>` : ''}
+                    ${tagsContainerHtml}
+                    <div class="track-summary">${track.summary}</div>
+                `;
+
+                card.onclick = function() {
+                    source.src = track.url;
+                    player.load();
+                    player.play();
+                    document.querySelectorAll('.track-card').forEach(b => b.classList.remove('active-song'));
+                    this.classList.add('active-song');
+                };
+                container.appendChild(card);
+            });
+        }
+
+        function populateFilter() {
+            const select = document.getElementById('story-filter');
+            select.innerHTML = '<option value="all">📚 Hiển thị Tất cả Truyện</option>';
+            if (typeof NOVEL_LIST === 'undefined') return;
+
+            const uniqueStories = [...new Set(NOVEL_LIST.map(item => item.story_id))].filter(Boolean);
+            uniqueStories.forEach(storyId => {
+                let option = document.createElement('option');
+                option.value = storyId;
+                option.textContent = `📖 Bộ truyện: ${storyId}`; 
+                select.appendChild(option);
+            });
+        }
+
+        function applyFilter() {
+            const selectedId = document.getElementById('story-filter').value;
+            let filteredData = [];
+            if (selectedId === 'all') {
+                filteredData = typeof NOVEL_LIST !== 'undefined' ? NOVEL_LIST : [];
+            } else {
+                filteredData = NOVEL_LIST.filter(item => item.story_id === selectedId);
+            }
+            renderPlaylist(filteredData, filteredData.length > 0 ? filteredData[0].url : "");
+        }
+
+        function switchMode(mode) {
+            document.getElementById('btn-news').classList.toggle('active', mode === 'news');
+            document.getElementById('btn-novel').classList.toggle('active', mode === 'novel');
+
+            const titleEl = document.getElementById('main-title');
+            const subEl = document.getElementById('main-subtitle');
+            const filterContainer = document.getElementById('filter-container');
+            const playlistTitle = document.getElementById('playlist-title');
+
+            if (mode === 'news') {
+                titleEl.innerHTML = "🎙️ BBC AI Podcast";
+                subEl.innerHTML = "This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely Meo Meo";
+                playlistTitle.innerHTML = "📰 BBC News";
+                filterContainer.style.display = 'none'; 
+                renderPlaylist(typeof PODCAST_LIST !== 'undefined' ? PODCAST_LIST : [], typeof LATEST_PODCAST !== 'undefined' ? LATEST_PODCAST : "");
+            } else {
+                titleEl.innerHTML = "🌙 Tabi yêu ngủ ngon";
+                subEl.innerHTML = "Lên giường, đắp chăn và nghe anh kể chuyện nha bé ngoan.<br>Powered by Lovely Meo Meo";
+                playlistTitle.innerHTML = "📖 Tủ Sách Của Chồng";
+                filterContainer.style.display = 'block'; 
+                populateFilter(); 
+                applyFilter();    
+            }
+        }
+
+        switchMode('news');
+    </script>
 </body>
 </html>
