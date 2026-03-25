@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBC Daily Podcast</title>
+    <title>BBC Daily Podcast & Truyện Đêm Khuya</title>
     <style>
         /* 🌟 BƯỚC 1: BIẾN CSS TRONG SUỐT (GLASSMORPHISM) 🌟 */
         :root {
@@ -16,7 +16,7 @@
             --text-sub: #a83e73;
             --card-bg: rgba(255, 255, 255, 0.5);
             --card-hover: rgba(255, 255, 255, 0.8);
-            --active-bg: #c16584e0;
+            --active-bg: #d7678ce0;
             --active-text: #ffffff;
             --meta-text: #c86b8e;
             --sticker-filter: none;
@@ -29,7 +29,7 @@
             --text-sub: #388e3c;
             --card-bg: rgba(255, 255, 255, 0.5);
             --card-hover: rgba(255, 255, 255, 0.8);
-            --active-bg: #4a8d4cb5;
+            --active-bg: #5bb35eb5;
             --active-text: #ffffff;
             --meta-text: #66bb6a;
         }
@@ -41,7 +41,7 @@
             --text-sub: #1976d2;
             --card-bg: rgba(255, 255, 255, 0.5);
             --card-hover: rgba(255, 255, 255, 0.8);
-            --active-bg: #5085b0;
+            --active-bg: #5d9fd4;
             --active-text: #ffffff;
             --meta-text: #42a5f5;
         }
@@ -75,144 +75,43 @@
             transition: all 0.4s ease;
         }
         
-        .theme-switcher {
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-        .theme-btn {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.8);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+        .theme-switcher { position: absolute; top: 15px; left: 20px; display: flex; gap: 8px; z-index: 10; }
+        .theme-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .theme-btn:hover { transform: scale(1.2); }
-        .btn-pinky { background-color: #ffb6c1; }
-        .btn-greeny { background-color: #a5d6a7; }
-        .btn-bluebaby { background-color: #90caf9; }
-        .btn-blackwhite { background-color: #424242; }
+        .btn-pinky { background-color: #ffb6c1; } .btn-greeny { background-color: #a5d6a7; } .btn-bluebaby { background-color: #90caf9; } .btn-blackwhite { background-color: #424242; }
 
-        .container {
-            background: var(--glass-container);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            padding: 40px 30px 30px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .my-sticker {
-            position: absolute;
-            top: -35px;
-            right: -15px;
-            width: 85px;
-            transform: rotate(15deg);
-            filter: var(--sticker-filter);
-            transition: filter 0.4s ease;
-        }
-        h1 { color: var(--text-main); margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); }
-        p.subtitle { color: var(--text-sub); line-height: 1.5; font-size: 0.9em; margin-bottom: 25px;}
+        .container { background: var(--glass-container); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); padding: 40px 30px 30px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); text-align: center; width: 90%; max-width: 500px; position: relative; transition: all 0.4s ease; }
+        .my-sticker { position: absolute; top: -35px; right: -15px; width: 85px; transform: rotate(15deg); filter: var(--sticker-filter); transition: filter 0.4s ease; }
+        h1 { color: var(--text-main); margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); transition: color 0.3s; }
+        p.subtitle { color: var(--text-sub); line-height: 1.5; font-size: 0.9em; margin-bottom: 25px; transition: color 0.3s; }
         
-        audio {
-            width: 100%;
-            margin-bottom: 20px;
-            border-radius: 30px;
-            opacity: 0.9;
-        }
+        /* 🌟 CSS CHO 2 NÚT CHUYỂN MODE 🌟 */
+        .mode-switch { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .mode-btn { background: rgba(255, 255, 255, 0.3); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 18px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .mode-btn:hover { background: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
+        .mode-btn.active { background: var(--active-bg); color: var(--active-text); box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-color: transparent; }
 
-        .playlist {
-            max-height: 280px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding-right: 5px;
-            text-align: left;
-        }
+        audio { width: 100%; margin-bottom: 20px; border-radius: 30px; opacity: 0.9; }
+
+        .playlist { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 5px; text-align: left; }
         .playlist::-webkit-scrollbar { width: 6px; }
         .playlist::-webkit-scrollbar-thumb { background: var(--active-bg); border-radius: 10px; }
 
-        .track-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-        .track-card:hover {
-            transform: translateY(-3px); 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-        }
-        .active-song {
-            background-color: var(--active-bg);
-            color: var(--active-text);
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .active-song .track-meta, .active-song .track-summary {
-            color: var(--active-text);
-            opacity: 0.9;
-        }
+        .track-card { background-color: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .track-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .active-song { background-color: var(--active-bg); color: var(--active-text); border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .active-song .track-meta, .active-song .track-summary { color: var(--active-text); opacity: 0.9; }
         
         .track-title { font-weight: bold; font-size: 1.05em; margin-bottom: 4px; }
         .track-meta { font-size: 0.75em; color: var(--meta-text); margin-bottom: 8px; font-style: italic; }
         .track-summary { font-size: 0.85em; color: var(--text-main); opacity: 0.8; line-height: 1.3; }
 
-        /* 🌟 PHẦN CSS MỚI THÊM CHO HASHTAG & IELTS 🌟 */
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .badge {
-            padding: 4px 10px;
-            font-size: 0.75em;
-            font-weight: 600;
-            color: var(--text-main); /* Ăn theo màu chữ của theme hiện tại */
-            background: rgba(255, 255, 255, 0.4); /* Kính mờ */
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            transition: transform 0.2s ease; /* Hiệu ứng hover chuẩn yêu cầu */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .badge:hover {
-            transform: translateY(-2px); /* Nảy lên một chút xíu, KHÔNG ĐỔI MÀU */
-        }
-
-        .badge.ielts {
-            border-color: var(--active-bg);
-            color: var(--active-bg);
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Xử lý hiển thị Hashtag khi thẻ bài đang được chọn (active) */
-        .active-song .badge {
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--active-text);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-        .active-song .badge.ielts {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: #fff;
-        }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+        .badge { padding: 4px 10px; font-size: 0.75em; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; transition: transform 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .badge:hover { transform: translateY(-2px); }
+        .badge.ielts { border-color: var(--active-bg); color: var(--active-bg); background: rgba(255, 255, 255, 0.6); }
+        .active-song .badge { background: rgba(255, 255, 255, 0.2); color: var(--active-text); border-color: rgba(255, 255, 255, 0.4); }
+        .active-song .badge.ielts { background: rgba(255, 255, 255, 0.3); border-color: #fff; }
     </style>
 </head>
 <body>
@@ -225,9 +124,15 @@
         </div>
 
         <img src="download1.jpg" alt="Cute Sticker" class="my-sticker">
-        <h1>🎙️ BBC AI Daily</h1>
-        <p class="subtitle">This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely meo meo</p>
         
+        <h1 id="main-title">🎙️ BBC AI Daily</h1>
+        <p id="main-subtitle" class="subtitle">This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely meo meo</p>
+        
+        <div class="mode-switch">
+            <button id="btn-news" class="mode-btn active" onclick="switchMode('news')">Engrisk News</button>
+            <button id="btn-novel" class="mode-btn" onclick="switchMode('novel')">Vietnamlove</button>
+        </div>
+
         <audio id="podcastPlayer" controls>
             <source id="audioSource" src="">
         </audio>
@@ -235,6 +140,8 @@
         <div class="playlist" id="playlistContainer"></div>
 
         <script src="config.js"></script>
+        <script src="config_novel.js"></script>
+        
         <script>
             function setTheme(themeName) {
                 document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
@@ -259,15 +166,27 @@
                 return `${diffDays} ngày trước`;
             }
 
-            if (typeof PODCAST_LIST !== 'undefined' && PODCAST_LIST.length > 0) {
+            // 🌟 HÀM RENDER CHUNG CHO CẢ 2 MODE (CODE CŨ CỦA MÀY ĐƯỢC BỌC LẠI) 🌟
+            function renderPlaylist(dataArray, latestAudioUrl) {
                 let player = document.getElementById("podcastPlayer");
                 let source = document.getElementById("audioSource");
                 let container = document.getElementById("playlistContainer");
+                
+                // Dọn sạch danh sách cũ trước khi nhét bài mới vào
+                container.innerHTML = ""; 
 
-                source.src = LATEST_PODCAST;
+                if (!dataArray || dataArray.length === 0) {
+                    container.innerHTML = "<p style='text-align:center;'>Đang cập nhật nội dung...</p>";
+                    source.src = "";
+                    player.load();
+                    return;
+                }
+
+                // Load bài mới nhất lên Audio Player
+                source.src = latestAudioUrl;
                 player.load();
 
-                PODCAST_LIST.forEach((track, index) => {
+                dataArray.forEach((track, index) => {
                     let card = document.createElement("div");
                     card.className = "track-card";
                     if (index === 0) card.classList.add("active-song");
@@ -280,22 +199,18 @@
                         timeAgoStr = timeAgo(track.timestamp);
                     }
 
-                    // 🌟 PHẦN CODE JS MỚI: RENDER HASHTAG & IELTS 🌟
                     let tagsHtml = "";
-                    // 1. Nếu có điểm IELTS thì in ra đầu tiên cho oai
+                    // Nếu là mode News có IELTS thì in ra
                     if (track.ielts_score) {
                         tagsHtml += `<span class="badge ielts">🎯 IELTS: ${track.ielts_score}</span>`;
                     }
-                    // 2. Nếu có mảng hashtags thì vòng lặp để in ra từng thẻ
                     if (track.hashtags && Array.isArray(track.hashtags)) {
                         track.hashtags.forEach(tag => {
                             tagsHtml += `<span class="badge">${tag}</span>`;
                         });
                     }
-                    // Bọc tất cả tag vào một cái container nếu có data
                     let tagsContainerHtml = tagsHtml !== "" ? `<div class="tags-container">${tagsHtml}</div>` : "";
 
-                    // Cập nhật lại giao diện innerHTML của từng Track Card
                     card.innerHTML = `
                         <div class="track-title">🎧 ${track.title}</div>
                         ${track.timestamp ? `<div class="track-meta">🗓️ ${dateStr} • ⏳ ${timeAgoStr}</div>` : ''}
@@ -312,9 +227,38 @@
                     };
                     container.appendChild(card);
                 });
-            } else {
-                document.getElementById("playlistContainer").innerHTML = "<p style='text-align:center;'>Đang cập nhật bản tin...</p>";
             }
+
+            // 🌟 LOGIC CHUYỂN ĐỔI TAB 🌟
+            function switchMode(mode) {
+                // Đổi class Active cho nút bấm (để nút sáng lên)
+                document.getElementById('btn-news').classList.toggle('active', mode === 'news');
+                document.getElementById('btn-novel').classList.toggle('active', mode === 'novel');
+
+                const titleEl = document.getElementById('main-title');
+                const subEl = document.getElementById('main-subtitle');
+
+                if (mode === 'news') {
+                    // Cập nhật text Tiêu đề
+                    titleEl.innerHTML = "🎙️ BBC AI Daily";
+                    subEl.innerHTML = "This podcast is automatically generated by AI from the latest BBC news.<br>Powered by Lovely meo meo";
+                    
+                    // Gọi data từ config.js (PODCAST_LIST)
+                    renderPlaylist(typeof PODCAST_LIST !== 'undefined' ? PODCAST_LIST : [], 
+                                   typeof LATEST_PODCAST !== 'undefined' ? LATEST_PODCAST : "");
+                } else {
+                    // Cập nhật text Tiêu đề cho Mode Truyện
+                    titleEl.innerHTML = "🌙 Chúc Bé Ngủ Ngoan";
+                    subEl.innerHTML = "Nhắm mắt lại và để AI thủ thỉ cho bạn nghe những câu chuyện lôi cuốn nhất.<br>Powered by Lovely meo meo";
+                    
+                    // Gọi data từ config_novel.js (NOVEL_LIST)
+                    renderPlaylist(typeof NOVEL_LIST !== 'undefined' ? NOVEL_LIST : [], 
+                                   typeof LATEST_NOVEL !== 'undefined' ? LATEST_NOVEL : "");
+                }
+            }
+
+            // Kích hoạt mặc định là Tab Engrisk News lúc vừa vào trang
+            switchMode('news');
         </script>
     </div>
 </body>
