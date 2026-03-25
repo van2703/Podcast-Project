@@ -1,5 +1,33 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260325_141901.mp3",
+        "title": "World on Edge: Justice, Power, and Tech Shocks",
+        "summary": "This episode dives into raw survivor testimonies, major political upsets, tech giants facing massive fines, and economic warnings that could shake the globe.",
+        "timestamp": "2026-03-25T14:19:42.177136",
+        "hashtags": [
+            "#GlobalNews",
+            "#Podcast",
+            "#TechDrama",
+            "#PoliticalUpset",
+            "#JusticeWatch"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260325_140622.mp3",
+        "title": "Global Turmoil: Economy, Conflict, and Hope",
+        "summary": "The world grapples with economic recession fears and escalating international conflicts, balanced by moments of global unity and heartbreaking loss.",
+        "timestamp": "2026-03-25T14:06:54.810103",
+        "hashtags": [
+            "#GlobalEconomy",
+            "#WorldConflicts",
+            "#PoliticalShift",
+            "#PopCulture",
+            "#BreakingNews"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
         "url": "audios/bbc_podcast_20260325_113415.wav",
         "title": "Global Turmoil: Economy, Conflict, and Hope",
         "summary": "The world grapples with economic recession fears and escalating international conflicts, balanced by moments of global unity and heartbreaking loss.",
@@ -142,4 +170,4 @@ const PODCAST_LIST = [
         "timestamp": "2026-03-24T13:47:55.439102"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260325_113415.wav";
+const LATEST_PODCAST = "audios/bbc_podcast_20260325_141901.mp3";
