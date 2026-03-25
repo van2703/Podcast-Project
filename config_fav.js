@@ -1,5 +1,23 @@
 const FAV_LIST = [
     {
+        "url": "tabi_music/Tâm Sự Với Đêm Một Mình - Phân Khối Lơn.mp3",
+        "title": "Tâm Sự Với Đêm Một Mình",
+        "artist": "Phân Khối Lơn",
+        "timestamp": "2026-03-26T00:53:20.305365"
+    },
+    {
+        "url": "tabi_music/Em Đau - Lắp Ráp Camera Quận 1.mp3",
+        "title": "Em Đau",
+        "artist": "Lắp Ráp Camera Quận 1",
+        "timestamp": "2026-03-26T00:51:41.133550"
+    },
+    {
+        "url": "tabi_music/Anh Muốn Nhìn Thấy Em - The Wind feat Dangrangto.mp3",
+        "title": "Anh Muốn Nhìn Thấy Em",
+        "artist": "The Wind feat Dangrangto",
+        "timestamp": "2026-03-26T00:50:26.861489"
+    },
+    {
         "url": "tabi_music/Đã Lỡ Yêu Em Nhiều - Justatee.mp3",
         "title": "Đã Lỡ Yêu Em Nhiều",
         "artist": "Justatee",
