@@ -1,27 +1,9 @@
 const PODCAST_LIST = [
     {
-        "url": "audios/bbc_podcast_20260325_083425.wav",
-        "title": "Global News: Economy, Conflicts, Crashes, and Deals",
-        "summary": "A financial leader warns of global recession from high oil, conflicts change, a plane crashes due to error, and new trade deals are signed.",
-        "timestamp": "2026-03-25T08:36:03.742678"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_200731.wav",
-        "title": "Today's Global Headlines: Conflict, Trade, and Elections",
-        "summary": "We cover Israel's new buffer zone, Russian strikes in Ukraine, a trade deal for Australia and the EU, Danish elections, and a plane crash in Colombia.",
-        "timestamp": "2026-03-24T20:07:34.955898"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_192621.wav",
-        "title": "World News: From Diplomacy to Tragedies",
-        "summary": "Today we cover global events, including presidential activities, conflicts, and plane crash investigations.",
-        "timestamp": "2026-03-24T19:26:23.073695"
-    },
-    {
-        "url": "audios/bbc_podcast_20260324_192125.wav",
-        "title": "World News: Crashes, Conflicts, and Diplomacy",
-        "summary": "Today, we cover a range of global events, from tragic plane crashes and ongoing conflicts to political accusations and surprising presidential activities.",
-        "timestamp": "2026-03-24T19:21:27.836888"
+        "url": "audios/bbc_podcast_20260325_062229.wav",
+        "title": "Global News: Conflicts, Deals, and Tragedies",
+        "summary": "Today we cover major drone attacks in Ukraine, shifting global conflict rules, a tragic plane crash, and a big trade deal between Australia and the EU.",
+        "timestamp": "2026-03-25T06:22:31.585673"
     },
     {
         "url": "audios/bbc_podcast_20260324_165532.mp3",
@@ -169,4 +151,8 @@ const PODCAST_LIST = [
         "summary": "Today, we look at how US talks are affecting oil and shares, a strong warning about Earth's climate, and new police powers in Hong Kong. We also cover the passing of the OnlyFans owner and arrests in Nigeria."
     }
 ];
+<<<<<<< HEAD
 const LATEST_PODCAST = "audios/bbc_podcast_20260325_083425.wav";
+=======
+const LATEST_PODCAST = "audios/bbc_podcast_20260325_062229.wav";
+>>>>>>> d75d0ec04d260f95f66faaa114fe14f6b0b0baee
