@@ -1,6 +1,32 @@
 const NOVEL_LIST = [
     {
         "story_id": "HP",
+        "url": "audios_novel/HP/HP_hp_chap4.mp3",
+        "title": "Harry Porter - Chương 4",
+        "summary": "Cùng nhắm mắt và lắng nghe chương 4 của bộ truyện Harry Porter.",
+        "timestamp": "2026-03-25T21:57:51.828365",
+        "hashtags": [
+            "#Magic",
+            "#DarkArts",
+            "#DungCam",
+            "#TinhBan"
+        ]
+    },
+    {
+        "story_id": "HP",
+        "url": "audios_novel/HP/HP_hp_chap3.mp3",
+        "title": "Harry Porter - Chương 3",
+        "summary": "Cùng nhắm mắt và lắng nghe chương 3 của bộ truyện Harry Porter.",
+        "timestamp": "2026-03-25T20:03:14.201009",
+        "hashtags": [
+            "#Magic",
+            "#DarkArts",
+            "#DungCam",
+            "#TinhBan"
+        ]
+    },
+    {
+        "story_id": "HP",
         "url": "audios_novel/HP/HP_hp_chap2.mp3",
         "title": "Harry Porter - Chương 2",
         "summary": "Cùng nhắm mắt và lắng nghe chương 2 của bộ truyện Harry Porter.",
@@ -41,4 +67,4 @@ const NOVEL_LIST = [
         ]
     }
 ];
-const LATEST_NOVEL = "audios_novel/HP/HP_hp_chap2.mp3";
+const LATEST_NOVEL = "audios_novel/HP/HP_hp_chap4.mp3";
