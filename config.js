@@ -1,5 +1,18 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260327_062220.mp3",
+        "title": "Global Turmoil: From Drones to Democracy",
+        "summary": "This episode dives into urgent drone deals, global economic ripples, a fight for justice, a critical Olympic decision, and a plea from the natural world.",
+        "timestamp": "2026-03-27T06:22:32.470919",
+        "hashtags": [
+            "#GlobalCrisis",
+            "#HumanRights",
+            "#WildlifeRescue",
+            "#SportsDebate"
+        ],
+        "ielts_score": "7.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260326_062541.mp3",
         "title": "A Rollercoaster Week: Justice, Power, and Discovery",
         "summary": "This week's news brings a whirlwind of justice sought, political upsets, personal heartbreak, and astonishing historical finds.",
@@ -70,4 +83,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260326_062541.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260327_062220.mp3";
