@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Podcast & Music Player</title>
     <style>
-        /* 🌟 BƯỚC 1: HỆ THỐNG MÀU SẮC & GLASSMORPHISM 🌟 */
+        /* 🌟 KHÔI PHỤC HỆ THỐNG MÀU SẮC THEME 🌟 */
         :root {
             --bg-image: url('background.jpg');
             --glass-container: rgba(255, 240, 245, 0.45); 
@@ -32,69 +32,77 @@
             transition: all 0.4s ease; font-size: 0.95em; 
         }
         
+        /* 🌟 KHÔI PHỤC MÀU CHO 4 NÚT TRÒN ĐỔI THEME 🌟 */
         .theme-switcher { position: absolute; top: 20px; left: 20px; display: flex; gap: 8px; z-index: 10; }
         .theme-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); cursor: pointer; transition: transform 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .theme-btn:hover { transform: scale(1.2); }
-        .btn-pinky { background-color: #ffb6c1; } .btn-greeny { background-color: #a5d6a7; } .btn-bluebaby { background-color: #90caf9; } .btn-blackwhite { background-color: #424242; }
+        
+        /* ĐÂY LÀ PHẦN TAO LỠ TAY XÓA: */
+        .btn-pinky { background-color: #ffb6c1; } 
+        .btn-greeny { background-color: #a5d6a7; } 
+        .btn-bluebaby { background-color: #90caf9; } 
+        .btn-blackwhite { background-color: #424242; }
 
-        /* 🌟 BƯỚC 2: BỐ CỤC 2 CỘT HIỆN ĐẠI 🌟 */
         .main-wrapper { 
             display: flex; width: 92%; max-width: 1000px; height: 85vh; 
             background: var(--glass-container); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border); border-radius: 24px; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); overflow: hidden; 
         }
 
-        .left-panel {
-            flex: 1; padding: 40px 30px; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            border-right: 1px solid var(--glass-border); position: relative;
+        .left-panel { flex: 1.1; padding: 35px 25px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--glass-border); text-align: center; }
+        .right-panel { flex: 1.2; padding: 25px; display: flex; flex-direction: column; overflow: hidden; }
+
+        h1 { font-size: 1.7em; margin-bottom: 5px; font-weight: 800; }
+        .mode-switch { display: flex; gap: 6px; margin-bottom: 25px; width: 100%; }
+        .mode-btn { flex: 1; background: rgba(255, 255, 255, 0.3); border: 1px solid var(--glass-border); color: var(--text-main); padding: 10px 5px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 0.8em; }
+        .mode-btn.active { background: var(--active-bg); color: white; }
+
+        /* 🌟 GRID 6 THẺ ALBUM - THỨ TỰ CHUẨN 🌟 */
+        .album-grid { display: none; grid-template-columns: 1fr 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 20px; }
+        .album-card { 
+            background: rgba(255, 255, 255, 0.25); border: 1px solid var(--glass-border); 
+            border-radius: 15px; padding: 12px 5px; cursor: pointer; 
+            transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 5px;
         }
-
-        .right-panel { flex: 1.3; padding: 30px; display: flex; flex-direction: column; overflow: hidden; }
-
-        h1 { font-size: 1.8em; margin-bottom: 5px; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.3); }
-        p.subtitle { line-height: 1.4; font-size: 0.85em; margin-bottom: 25px; opacity: 0.9; }
-        
-        /* 🌟 NÚT CHUYỂN MODE 🌟 */
-        .mode-switch { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; width: 100%;}
-        .mode-btn { flex: 1; background: rgba(255, 255, 255, 0.3); border: 1px solid var(--glass-border); color: var(--text-main); padding: 10px 5px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-size: 0.8em; white-space: nowrap;}
-        .mode-btn.active { background: var(--active-bg); color: var(--active-text); border-color: transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .album-card:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.45); }
+        .album-card.active { background: var(--active-bg); color: white; border: none; }
+        .album-card span { font-size: 1.1em; }
+        .album-card b { font-size: 0.8em; }
 
         .filter-container { width: 100%; margin-bottom: 20px; display: none; }
-        .glass-select { width: 100%; padding: 10px; font-size: 0.9em; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; outline: none; cursor: pointer; text-align: center; }
-        
-        /* 🌟 BỘ ĐIỀU KHIỂN SPOTIFY 🌟 */
-        .player-controls { display: none; gap: 8px; margin-top: 15px; width: 100%; justify-content: center; flex-wrap: wrap;}
-        .ctrl-btn { background: rgba(255,255,255,0.2); border: 1px solid var(--glass-border); border-radius: 12px; padding: 6px 10px; font-size: 0.75em; font-weight: 600; cursor: pointer; color: var(--text-main); transition: all 0.2s; }
-        .ctrl-btn.active { background: var(--active-bg); color: white; border: none; }
+        .glass-select { width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.4); color: var(--text-main); font-weight: 600; outline: none; }
 
-        audio { width: 100%; border-radius: 30px; opacity: 0.9; margin-top: auto; }
+        .player-controls { display: none; gap: 8px; margin-top: 15px; width: 100%; justify-content: center; }
+        .ctrl-btn { background: rgba(255,255,255,0.2); border: 1px solid var(--glass-border); border-radius: 10px; padding: 6px 12px; font-size: 0.75em; font-weight: 600; cursor: pointer; color: var(--text-main); }
+        .ctrl-btn.active { background: var(--active-bg); color: white; }
+
+        audio { width: 100%; border-radius: 30px; margin-top: auto; }
 
         .playlist-header { font-size: 1.1em; font-weight: 800; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); }
-        
-        .playlist { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 8px; }
+        .playlist { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; }
         .playlist::-webkit-scrollbar { width: 5px; }
         .playlist::-webkit-scrollbar-thumb { background: var(--active-bg); border-radius: 10px; }
 
-        .track-card { background-color: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px; cursor: pointer; transition: all 0.2s ease; }
+        .track-card { background-color: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px; cursor: pointer; transition: all 0.2s ease; position: relative; }
         .track-card:hover { transform: translateY(-2px); background-color: var(--card-hover); }
         .active-song { background-color: var(--active-bg); color: var(--active-text); border: none; }
         
-        .track-title { font-weight: bold; font-size: 1em; margin-bottom: 3px; }
-        .track-meta { font-size: 0.7em; margin-bottom: 6px; font-style: italic; opacity: 0.8; }
-        .track-summary { font-size: 0.8em; opacity: 0.8; line-height: 1.3; }
-        
-        .tags-container { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
-        .badge { padding: 3px 8px; font-size: 0.65em; font-weight: 600; background: rgba(255, 255, 255, 0.4); border: 1px solid var(--glass-border); border-radius: 10px; }
-        .active-song .badge { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); color: white; }
+        .fav-btn { position: absolute; top: 12px; right: 12px; font-size: 1.1em; background: none; border: none; cursor: pointer; z-index: 5; }
+        .track-title { font-weight: bold; font-size: 1em; padding-right: 35px; text-align: left; }
 
-        @media (max-width: 768px) {
-            .main-wrapper { flex-direction: column; height: 90vh; overflow-y: auto; }
-            .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); }
-            .right-panel { overflow: visible; }
-            .playlist { overflow-y: visible; }
-        }
+        /* GIỮ NGUYÊN NGÀY GIỜ NHỎ + NGHIÊNG */
+        .track-meta { font-size: 0.75em; margin-bottom: 8px; font-style: italic; opacity: 0.8; text-align: left; }
+        
+        .track-summary { font-size: 0.8em; opacity: 0.8; margin-top: 5px; text-align: left; line-height: 1.3; }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+        .badge { padding: 3px 8px; font-size: 0.65em; font-weight: 600; background: rgba(255, 255, 255, 0.4); border-radius: 10px; }
+
+        .fav-popup { position: fixed; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 15px; padding: 12px; display: none; flex-direction: column; gap: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; min-width: 150px;}
+        .fav-popup button { border: none; background: none; padding: 10px; text-align: left; cursor: pointer; border-radius: 10px; font-weight: 600; color: var(--text-main); font-size: 0.85em; }
+        .fav-popup button:hover { background: rgba(0,0,0,0.05); }
+
+        @media (max-width: 768px) { .main-wrapper { flex-direction: column; height: auto; } .left-panel { border-right: none; border-bottom: 1px solid var(--glass-border); } }
     </style>
 </head>
 <body>
@@ -103,6 +111,15 @@
         <button class="theme-btn btn-greeny" onclick="setTheme('greeny')"></button>
         <button class="theme-btn btn-bluebaby" onclick="setTheme('bluebaby')"></button>
         <button class="theme-btn btn-blackwhite" onclick="setTheme('blackwhite')"></button>
+    </div>
+
+    <div id="favPopup" class="fav-popup">
+        <div style="font-size: 0.7em; opacity: 0.7; padding-left: 10px; margin-bottom: 5px;">Thêm vào Album của:</div>
+        <button onclick="saveToUser('Matchanav')">🍵 Matchanav</button>
+        <button onclick="saveToUser('Ngân Tabi')">🌸 Ngân Tabi</button>
+        <button onclick="saveToUser('My Hoàng')">🌟 My Hoàng</button>
+        <button onclick="saveToUser('Vân Nguyễn')">🎀 Vân Nguyễn</button>
+        <button onclick="saveToUser('Mỹ Duyên')">✨ Mỹ Duyên</button>
     </div>
 
     <div class="main-wrapper">
@@ -114,6 +131,15 @@
                 <button id="btn-news" class="mode-btn active" onclick="switchMode('news')">Engrisk</button>
                 <button id="btn-novel" class="mode-btn" onclick="switchMode('novel')">Vietnamlove</button>
                 <button id="btn-fav" class="mode-btn" onclick="switchMode('fav')">Tabi urfav</button>
+            </div>
+
+            <div id="album-grid" class="album-grid">
+                <div id="card-all" class="album-card active" onclick="filterByAlbum('all')"><span>🌈</span><b>Tất cả</b></div>
+                <div id="card-Matcha" class="album-card" onclick="filterByAlbum('Matchanav')"><span>🍵</span><b>Matchanav</b></div>
+                <div id="card-Ngan" class="album-card" onclick="filterByAlbum('Ngân Tabi')"><span>🌸</span><b>Ngân Tabi</b></div>
+                <div id="card-My" class="album-card" onclick="filterByAlbum('My Hoàng')"><span>🌟</span><b>My Hoàng</b></div>
+                <div id="card-Van" class="album-card" onclick="filterByAlbum('Vân Nguyễn')"><span>🎀</span><b>Vân Nguyễn</b></div>
+                <div id="card-Duyen" class="album-card" onclick="filterByAlbum('Mỹ Duyên')"><span>✨</span><b>Mỹ Duyên</b></div>
             </div>
 
             <div id="filter-container" class="filter-container">
@@ -146,15 +172,16 @@
     <script src="config_fav.js"></script>
     
     <script>
-        // --- TRẠNG THÁI HỆ THỐNG ---
         let currentPlaylist = [];
         let currentIndex = 0;
         let playbackMode = localStorage.getItem('tabi_playback_mode') || 'all'; 
+        let currentMode = 'news';
+        let currentAlbum = 'all';
+        let pendingFavUrl = null;
 
         const audioPlayer = document.getElementById("podcastPlayer");
         const audioSource = document.getElementById("audioSource");
 
-        // --- CÀI ĐẶT THEME ---
         function setTheme(themeName) {
             document.body.classList.remove('theme-greeny', 'theme-bluebaby', 'theme-blackwhite');
             if (themeName !== 'pinky') document.body.classList.add('theme-' + themeName);
@@ -162,7 +189,6 @@
         }
         setTheme(localStorage.getItem('selectedTheme') || 'pinky');
 
-        // --- LOGIC THỜI GIAN ---
         function timeAgo(dateString) {
             if (!dateString) return "";
             const diffMins = Math.round((new Date() - new Date(dateString)) / 60000);
@@ -172,149 +198,134 @@
             return `${Math.round(diffMins / 1440)} ngày trước`;
         }
 
-        // --- ĐIỀU KHIỂN SPOTIFY (TRÍ NHỚ & LOẠI TRỪ) ---
-        function setPlaybackMode(mode) {
-            playbackMode = mode;
-            localStorage.setItem('tabi_playback_mode', mode);
-            updateControlUI();
+        function openFavPopup(event, url) {
+            event.stopPropagation();
+            pendingFavUrl = url;
+            const popup = document.getElementById('favPopup');
+            popup.style.display = 'flex';
+            popup.style.top = (event.clientY - 10) + 'px';
+            popup.style.left = (event.clientX - 160) + 'px';
         }
 
+        function saveToUser(userName) {
+            let favs = JSON.parse(localStorage.getItem('fav_' + userName)) || [];
+            if (!favs.includes(pendingFavUrl)) { favs.push(pendingFavUrl); localStorage.setItem('fav_' + userName, JSON.stringify(favs)); } 
+            else { favs = favs.filter(u => u !== pendingFavUrl); localStorage.setItem('fav_' + userName, JSON.stringify(favs)); }
+            document.getElementById('favPopup').style.display = 'none';
+            if (currentAlbum !== 'all') filterByAlbum(currentAlbum); else refreshCurrentList();
+        }
+
+        function filterByAlbum(userName) {
+            currentAlbum = userName;
+            document.querySelectorAll('.album-card').forEach(b => b.classList.remove('active'));
+            const map = {'all':'card-all', 'My Hoàng':'card-My', 'Ngân Tabi':'card-Ngan', 'Matchanav':'card-Matcha', 'Vân Nguyễn':'card-Van', 'Mỹ Duyên':'card-Duyen'};
+            if(map[userName]) document.getElementById(map[userName]).classList.add('active');
+
+            let baseList = (currentMode === 'novel') ? (typeof NOVEL_LIST !== 'undefined' ? NOVEL_LIST : []) : (typeof FAV_LIST !== 'undefined' ? FAV_LIST : []);
+            if (userName === 'all') { renderPlaylist(baseList, baseList.length > 0 ? baseList[0].url : ""); } 
+            else {
+                const userFavs = JSON.parse(localStorage.getItem('fav_' + userName)) || [];
+                const filtered = baseList.filter(item => userFavs.includes(item.url));
+                renderPlaylist(filtered, filtered.length > 0 ? filtered[0].url : "");
+            }
+        }
+
+        function refreshCurrentList() {
+            if (currentMode === 'news') renderPlaylist(PODCAST_LIST, "");
+            else if (currentMode === 'novel') applyFilter();
+            else renderPlaylist(FAV_LIST, "");
+        }
+
+        function setPlaybackMode(mode) { playbackMode = mode; localStorage.setItem('tabi_playback_mode', mode); updateControlUI(); }
         function updateControlUI() {
             document.getElementById('btn-shuffle').classList.toggle('active', playbackMode === 'shuffle');
             document.getElementById('btn-repeat-one').classList.toggle('active', playbackMode === 'one');
             document.getElementById('btn-repeat-all').classList.toggle('active', playbackMode === 'all');
         }
 
-        audioPlayer.onended = function() {
-            if (playbackMode === 'one') {
-                audioPlayer.currentTime = 0;
-                audioPlayer.play();
-            } else {
-                nextTrack();
-            }
-        };
+        audioPlayer.onended = function() { if (playbackMode === 'one') { audioPlayer.currentTime = 0; audioPlayer.play(); } else { nextTrack(); } };
 
         function nextTrack() {
             if (currentPlaylist.length === 0) return;
             if (playbackMode === 'shuffle') {
-                let nextIndex;
-                do { nextIndex = Math.floor(Math.random() * currentPlaylist.length); } 
-                while (nextIndex === currentIndex && currentPlaylist.length > 1);
+                let nextIndex; do { nextIndex = Math.floor(Math.random() * currentPlaylist.length); } while (nextIndex === currentIndex && currentPlaylist.length > 1);
                 currentIndex = nextIndex;
-            } else {
-                currentIndex++;
-                if (currentIndex >= currentPlaylist.length) {
-                    if (playbackMode === 'all') currentIndex = 0;
-                    else return;
-                }
-            }
+            } else { currentIndex = (currentIndex + 1) % currentPlaylist.length; }
             playAtIndex(currentIndex);
         }
 
         function playAtIndex(index) {
-            currentIndex = index;
-            const track = currentPlaylist[index];
-            audioSource.src = track.url;
-            audioPlayer.load();
-            audioPlayer.play();
-            
-            document.querySelectorAll('.track-card').forEach((card, i) => {
-                card.classList.toggle('active-song', i === index);
-            });
+            currentIndex = index; const track = currentPlaylist[index]; audioSource.src = track.url; audioPlayer.load(); audioPlayer.play();
+            document.querySelectorAll('.track-card').forEach((card, i) => card.classList.toggle('active-song', i === index));
         }
 
-        // --- VẼ GIAO DIỆN ---
         function renderPlaylist(dataArray, latestAudioUrl) {
-            currentPlaylist = dataArray;
-            let container = document.getElementById("playlistContainer");
-            container.innerHTML = ""; 
-
-            if (!dataArray || dataArray.length === 0) {
-                container.innerHTML = "<p style='text-align:center;'>Kho nhạc đang trống...</p>";
-                audioSource.src = ""; audioPlayer.load();
-                return;
-            }
-
-            audioSource.src = latestAudioUrl;
-            audioPlayer.load();
+            currentPlaylist = dataArray; let container = document.getElementById("playlistContainer"); container.innerHTML = ""; 
+            if (!dataArray || dataArray.length === 0) { container.innerHTML = "<p style='text-align:center; padding-top:20px; opacity:0.5;'>Danh sách này đang trống...</p>"; return; }
+            if(latestAudioUrl) { audioSource.src = latestAudioUrl; audioPlayer.load(); }
 
             dataArray.forEach((track, index) => {
-                let card = document.createElement("div");
-                card.className = "track-card";
-                if (index === 0) card.classList.add("active-song");
+                let card = document.createElement("div"); card.className = "track-card";
+                let heartIcon = '🤍';
+                ['Ngân Tabi', 'My Hoàng', 'Matchanav', 'Vân Nguyễn', 'Mỹ Duyên'].forEach(u => { if ((JSON.parse(localStorage.getItem('fav_' + u)) || []).includes(track.url)) heartIcon = '❤️'; });
 
                 let tagsHtml = "";
                 if (track.ielts_score) tagsHtml += `<span class="badge ielts">🎯 IELTS: ${track.ielts_score}</span>`;
-                if (track.hashtags && Array.isArray(track.hashtags)) {
-                    track.hashtags.forEach(tag => tagsHtml += `<span class="badge">${tag}</span>`);
-                }
+                if (track.hashtags && Array.isArray(track.hashtags)) track.hashtags.forEach(tag => tagsHtml += `<span class="badge">${tag}</span>`);
                 
                 let subtitle = track.artist ? `🎤 ${track.artist}` : (track.summary || "");
+                let favBtnHtml = currentMode !== 'news' ? `<button class="fav-btn" onclick="openFavPopup(event, '${track.url}')">${heartIcon}</button>` : '';
 
                 card.innerHTML = `
+                    ${favBtnHtml}
                     <div class="track-title">🎧 ${track.title}</div>
                     ${track.timestamp ? `<div class="track-meta">🗓️ ${new Date(track.timestamp).toLocaleDateString('vi-VN')} • ⏳ ${timeAgo(track.timestamp)}</div>` : ''}
                     <div class="tags-container">${tagsHtml}</div>
                     <div class="track-summary">${subtitle}</div>
                 `;
-
-                card.onclick = () => playAtIndex(index);
-                container.appendChild(card);
+                card.onclick = () => playAtIndex(index); container.appendChild(card);
             });
         }
 
         function populateFilter() {
-            const select = document.getElementById('story-filter');
-            select.innerHTML = '<option value="all">Tất cả truyện</option>';
+            const select = document.getElementById('story-filter'); select.innerHTML = '<option value="all">Tất cả truyện</option>';
             if (typeof NOVEL_LIST === 'undefined') return;
             const uniqueStories = [...new Set(NOVEL_LIST.map(item => item.story_id))].filter(Boolean);
-            uniqueStories.forEach(storyId => {
-                let option = document.createElement('option');
-                option.value = storyId; option.textContent = `📖 Bộ: ${storyId}`; 
-                select.appendChild(option);
-            });
+            uniqueStories.forEach(storyId => { let option = document.createElement('option'); option.value = storyId; option.textContent = `📖 Bộ: ${storyId}`; select.appendChild(option); });
         }
 
         function applyFilter() {
             const selectedId = document.getElementById('story-filter').value;
             let filteredData = (selectedId === 'all') ? (NOVEL_LIST || []) : NOVEL_LIST.filter(item => item.story_id === selectedId);
-            renderPlaylist(filteredData, filteredData.length > 0 ? filteredData[0].url : "");
+            renderPlaylist(filteredData, "");
         }
 
-        // --- CHUYỂN ĐỔI CHẾ ĐỘ ---
         function switchMode(mode) {
+            currentMode = mode; currentAlbum = 'all'; 
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`btn-${mode}`).classList.add('active');
 
-            const titleEl = document.getElementById('main-title');
-            const subEl = document.getElementById('main-subtitle');
-            const filterContainer = document.getElementById('filter-container');
-            const playlistTitle = document.getElementById('playlist-title');
-            const playerControls = document.getElementById('player-controls');
+            const titleEl = document.getElementById('main-title'); const subEl = document.getElementById('main-subtitle');
+            const filterContainer = document.getElementById('filter-container'); const playlistTitle = document.getElementById('playlist-title');
+            const playerControls = document.getElementById('player-controls'); const albumGrid = document.getElementById('album-grid');
 
             if (mode === 'news') {
-                titleEl.innerHTML = "🎙️ BBC AI Podcast";
-                subEl.innerHTML = "Bản tin tự động tổng hợp từ BBC.<br>Powered by Lovely Meo Meo";
-                playlistTitle.innerHTML = "📰 Tin tức mới nhất";
-                filterContainer.style.display = 'none'; playerControls.style.display = 'none';
+                titleEl.innerHTML = "🎙️ BBC AI Podcast"; subEl.innerHTML = "Bản tin tự động tổng hợp từ BBC.<br>Powered by Lovely Meo Meo";
+                playlistTitle.innerHTML = "📰 Tin tức mới nhất"; filterContainer.style.display = 'none'; playerControls.style.display = 'none'; albumGrid.style.display = 'none';
                 renderPlaylist(typeof PODCAST_LIST !== 'undefined' ? PODCAST_LIST : [], typeof LATEST_PODCAST !== 'undefined' ? LATEST_PODCAST : "");
             } else if (mode === 'novel') {
-                titleEl.innerHTML = "🌙 Tabi yêu ngủ ngon";
-                subEl.innerHTML = "Đắp chăn và nghe anh kể chuyện nha bé ngoan.<br>Powered by Lovely Meo Meo";
-                playlistTitle.innerHTML = "📖 Tủ sách của chồng";
-                filterContainer.style.display = 'block'; playerControls.style.display = 'flex';
-                populateFilter(); applyFilter();    
+                titleEl.innerHTML = "🌙 Tabi yêu ngủ ngon"; subEl.innerHTML = "Đắp chăn và nghe anh kể chuyện nha bé ngoan.<br>Powered by Lovely Meo Meo";
+                playlistTitle.innerHTML = "📖 Tủ sách của chồng"; filterContainer.style.display = 'block'; playerControls.style.display = 'flex'; albumGrid.style.display = 'grid';
+                populateFilter(); applyFilter();
             } else if (mode === 'fav') {
-                titleEl.innerHTML = "Tabi urfav";
-                subEl.innerHTML = "Một góc nhỏ dành cho súp lơ bé bỏng<br>Born to say Love you Meo Meo";
-                playlistTitle.innerHTML = "🎵 Bibi Playlist";
-                filterContainer.style.display = 'none'; playerControls.style.display = 'flex';
-                let favData = typeof FAV_LIST !== 'undefined' ? FAV_LIST : [];
-                renderPlaylist(favData, favData.length > 0 ? favData[0].url : "");
+                titleEl.innerHTML = "Tabi urfav"; subEl.innerHTML = "Một góc nhỏ dành cho súp lơ bé bỏng<br>Born to say Love you Meo Meo";
+                playlistTitle.innerHTML = "🎵 Bibi Playlist"; filterContainer.style.display = 'none'; playerControls.style.display = 'flex'; albumGrid.style.display = 'grid';
+                filterByAlbum('all');
             }
         }
 
-        // Khởi tạo
+        window.onclick = function(event) { if (!event.target.closest('.fav-btn') && !event.target.closest('.fav-popup')) document.getElementById('favPopup').style.display = 'none'; }
+
         updateControlUI();
         switchMode('news');
     </script>
