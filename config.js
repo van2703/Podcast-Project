@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260328_062350.mp3",
+        "title": "Weekly World Rundown: Key Stories Unpacked",
+        "summary": "This podcast covers major global headlines, from political developments and social issues to international incidents and personal challenges.",
+        "timestamp": "2026-03-28T06:24:03.048539",
+        "hashtags": [
+            "#GlobalNews",
+            "#USPolitics",
+            "#SocialMediaKids",
+            "#Cybersecurity",
+            "#WorldEvents"
+        ],
+        "ielts_score": "7.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260326_120317.mp3",
         "title": "Today's Headlines: Justice, Global Issues, and History",
         "summary": "This episode covers a landmark social media addiction verdict, global human rights news, energy challenges, and fascinating historical discoveries.",
@@ -84,4 +98,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260326_120317.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260328_062350.mp3";
