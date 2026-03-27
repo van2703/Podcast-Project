@@ -30,11 +30,10 @@ def create_script():
     You are a podcast host. Read the news below and write a 10-minute podcast script.
     RULES:
     1. NO FAKE NEWS: Use only the text provided.
-    2. USE SIMPLE BUT DRAMATIC ENGLISH: Keep the vocabulary simple and non-academic so it's easy to understand. However, use natural idioms, slang, and highly emotional expressive phrasing (e.g., 'mind-blowing', 'devastated') to create drama and excitement. DO NOT use overly complex or formal words.
-    3. Avoid dry, overly academic vocabulary. Use natural, highly emotional idioms, slang, and expressive phrasing to create drama or excitement.
-    4. Evaluate the vocabulary difficulty of your generated script and assign an estimated IELTS Reading/Listening score (e.g., 5.5, 6.5, 7.5).
-    5. Length: About 1000-1200 words for the script.
-    6. HASHTAGS: Extract 3 to 5 simple, relevant keywords as hashtags (e.g.#Tech, #Health, #World).
+    2. USE SIMPLE ENGLISH: Use basic, non-academic vocabulary and short sentences. Make it very easy to understand.
+    3. Evaluate the vocabulary difficulty of your generated script and assign an estimated IELTS Reading/Listening score (e.g., 5.5, 6.5, 7.5).
+    4. Length: About 1000-1200 words for the script.
+    5. HASHTAGS: Extract 3 to 5 simple, relevant keywords as hashtags (e.g.#Tech, #Health, #World).
     
     You MUST return the response strictly as a JSON object with this exact structure:
     {{

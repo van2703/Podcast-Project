@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260326_120317.mp3",
+        "title": "Today's Headlines: Justice, Global Issues, and History",
+        "summary": "This episode covers a landmark social media addiction verdict, global human rights news, energy challenges, and fascinating historical discoveries.",
+        "timestamp": "2026-03-26T12:04:49.184495",
+        "hashtags": [
+            "#SocialMediaJustice",
+            "#GlobalNews",
+            "#HumanRights",
+            "#EnergyCrisis",
+            "#HistoricalDiscovery"
+        ],
+        "ielts_score": "6.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260326_062541.mp3",
         "title": "A Rollercoaster Week: Justice, Power, and Discovery",
         "summary": "This week's news brings a whirlwind of justice sought, political upsets, personal heartbreak, and astonishing historical finds.",
@@ -70,4 +84,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260326_062541.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260326_120317.mp3";
