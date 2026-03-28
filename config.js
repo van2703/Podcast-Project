@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260329_062206.mp3",
+        "title": "Your Daily News: Updates from Around the World",
+        "summary": "Today, we cover aid ships found, celebrity arrests, protests, a major bank lawsuit, and global events.",
+        "timestamp": "2026-03-29T06:22:15.219959",
+        "hashtags": [
+            "#DailyNews",
+            "#WorldEvents",
+            "#USPolitics",
+            "#GlobalIssues",
+            "#SportsNews"
+        ],
+        "ielts_score": "6.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260328_062350.mp3",
         "title": "Weekly World Rundown: Key Stories Unpacked",
         "summary": "This podcast covers major global headlines, from political developments and social issues to international incidents and personal challenges.",
@@ -98,4 +112,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260328_062350.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260329_062206.mp3";
