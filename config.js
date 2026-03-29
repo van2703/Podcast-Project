@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260330_062341.mp3",
+        "title": "Global Updates: Conflicts, Crime, and Football News",
+        "summary": "Today, we cover ongoing tensions in the Middle East, a major art theft in Italy, an attempted bomb attack in Paris, and a shake-up in African football.",
+        "timestamp": "2026-03-30T06:23:52.734670",
+        "hashtags": [
+            "#WorldEvents",
+            "#MiddleEastCrisis",
+            "#ArtCrime",
+            "#FootballNews",
+            "#BusinessWatch"
+        ],
+        "ielts_score": "6.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260329_062206.mp3",
         "title": "Your Daily News: Updates from Around the World",
         "summary": "Today, we cover aid ships found, celebrity arrests, protests, a major bank lawsuit, and global events.",
@@ -112,4 +126,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260329_062206.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260330_062341.mp3";
