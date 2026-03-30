@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260331_062755.mp3",
+        "title": "Global Update: Laws, Fun, and Reunions",
+        "summary": "Today, we cover major global shifts, consumer concerns, and a touching reunion, keeping you informed on the latest headlines.",
+        "timestamp": "2026-03-31T06:28:05.240177",
+        "hashtags": [
+            "#WorldNews",
+            "#SocialIssues",
+            "#Geopolitics",
+            "#ConsumerWatch",
+            "#FamilyStories"
+        ],
+        "ielts_score": "7.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260330_062341.mp3",
         "title": "Global Updates: Conflicts, Crime, and Football News",
         "summary": "Today, we cover ongoing tensions in the Middle East, a major art theft in Italy, an attempted bomb attack in Paris, and a shake-up in African football.",
@@ -126,4 +140,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260330_062341.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260331_062755.mp3";
