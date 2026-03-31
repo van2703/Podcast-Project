@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260401_064951.mp3",
+        "title": "Global Headlines: Conflicts, Politics, and Personal News",
+        "summary": "Today's podcast covers tragic events in global conflict zones, key political updates from the US, a puzzling murder investigation, and news from the world of golf.",
+        "timestamp": "2026-04-01T06:49:58.823648",
+        "hashtags": [
+            "#WorldNews",
+            "#USPolitics",
+            "#Conflict",
+            "#Investigations",
+            "#Sports"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
         "url": "audios/bbc_podcast_20260331_062755.mp3",
         "title": "Global Update: Laws, Fun, and Reunions",
         "summary": "Today, we cover major global shifts, consumer concerns, and a touching reunion, keeping you informed on the latest headlines.",
@@ -140,4 +154,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260331_062755.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260401_064951.mp3";
