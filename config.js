@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260402_062833.mp3",
+        "title": "Global News: Politics, Tech, and a Tortoise",
+        "summary": "This episode covers global political tensions, a major train crash trial, robotaxi troubles, Italy's football heartbreak, and remembers the world's oldest tortoise.",
+        "timestamp": "2026-04-02T06:28:41.324903",
+        "hashtags": [
+            "#WorldNews",
+            "#USPolitics",
+            "#TechTrouble",
+            "#AnimalStories",
+            "#GlobalEvents"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
         "url": "audios/bbc_podcast_20260401_064951.mp3",
         "title": "Global Headlines: Conflicts, Politics, and Personal News",
         "summary": "Today's podcast covers tragic events in global conflict zones, key political updates from the US, a puzzling murder investigation, and news from the world of golf.",
@@ -154,4 +168,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260401_064951.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260402_062833.mp3";
