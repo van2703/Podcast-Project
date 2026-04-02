@@ -1,5 +1,19 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260403_062544.mp3",
+        "title": "Global Stories: Wars, Pets, and Recoveries",
+        "summary": "Today, we dive into the human cost of conflict in Iran, a new pet law in Brazil, US political changes, a celebrity lawsuit update, tragic crime in NYC, and a retrieved ancient artifact.",
+        "timestamp": "2026-04-03T06:25:55.167075",
+        "hashtags": [
+            "#WorldNews",
+            "#IranConflict",
+            "#USPolitics",
+            "#PetRights",
+            "#CrimeNews"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
         "url": "audios/bbc_podcast_20260402_062833.mp3",
         "title": "Global News: Politics, Tech, and a Tortoise",
         "summary": "This episode covers global political tensions, a major train crash trial, robotaxi troubles, Italy's football heartbreak, and remembers the world's oldest tortoise.",
@@ -168,4 +182,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260402_062833.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260403_062544.mp3";

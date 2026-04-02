@@ -1,5 +1,0 @@
-SOURCE: BBC NEWS
-TITLE: Mass robotaxi malfunction halts traffic in Chinese city
-LINK: https://www.bbc.com/news/articles/cvge91r9j80o?at_medium=RSS&at_campaign=rss
---- CONTENT ---
-Baidu has not responded to a request for comment about the outage, which affected at least 100 cars.
