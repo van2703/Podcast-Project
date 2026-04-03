@@ -1,5 +1,18 @@
 const PODCAST_LIST = [
     {
+        "url": "audios/bbc_podcast_20260401_222649.mp3",
+        "title": "Global Updates: Courts, Conflicts, and Travel",
+        "summary": "A clear review of today's top international news, covering legal rulings, political talks, travel changes, and nature rescue stories in simple English.",
+        "timestamp": "2026-04-01T22:27:44.342979",
+        "hashtags": [
+            "#GlobalNews",
+            "#SimpleEnglish",
+            "#WorldUpdate",
+            "#DailyBrief"
+        ],
+        "ielts_score": "6.0"
+    },
+    {
         "url": "audios/bbc_podcast_20260326_120317.mp3",
         "title": "Today's Headlines: Justice, Global Issues, and History",
         "summary": "This episode covers a landmark social media addiction verdict, global human rights news, energy challenges, and fascinating historical discoveries.",
@@ -84,4 +97,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260326_120317.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260401_222649.mp3";
