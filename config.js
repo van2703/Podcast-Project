@@ -10,7 +10,105 @@ const PODCAST_LIST = [
             "#WorldUpdate",
             "#DailyBrief"
         ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260403_062544.mp3",
+        "title": "Global Stories: Wars, Pets, and Recoveries",
+        "summary": "Today, we dive into the human cost of conflict in Iran, a new pet law in Brazil, US political changes, a celebrity lawsuit update, tragic crime in NYC, and a retrieved ancient artifact.",
+        "timestamp": "2026-04-03T06:25:55.167075",
+        "hashtags": [
+            "#WorldNews",
+            "#IranConflict",
+            "#USPolitics",
+            "#PetRights",
+            "#CrimeNews"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260402_062833.mp3",
+        "title": "Global News: Politics, Tech, and a Tortoise",
+        "summary": "This episode covers global political tensions, a major train crash trial, robotaxi troubles, Italy's football heartbreak, and remembers the world's oldest tortoise.",
+        "timestamp": "2026-04-02T06:28:41.324903",
+        "hashtags": [
+            "#WorldNews",
+            "#USPolitics",
+            "#TechTrouble",
+            "#AnimalStories",
+            "#GlobalEvents"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260401_064951.mp3",
+        "title": "Global Headlines: Conflicts, Politics, and Personal News",
+        "summary": "Today's podcast covers tragic events in global conflict zones, key political updates from the US, a puzzling murder investigation, and news from the world of golf.",
+        "timestamp": "2026-04-01T06:49:58.823648",
+        "hashtags": [
+            "#WorldNews",
+            "#USPolitics",
+            "#Conflict",
+            "#Investigations",
+            "#Sports"
+        ],
+        "ielts_score": "6.5"
+    },
+    {
+        "url": "audios/bbc_podcast_20260331_062755.mp3",
+        "title": "Global Update: Laws, Fun, and Reunions",
+        "summary": "Today, we cover major global shifts, consumer concerns, and a touching reunion, keeping you informed on the latest headlines.",
+        "timestamp": "2026-03-31T06:28:05.240177",
+        "hashtags": [
+            "#WorldNews",
+            "#SocialIssues",
+            "#Geopolitics",
+            "#ConsumerWatch",
+            "#FamilyStories"
+        ],
+        "ielts_score": "7.0"
+    },
+    {
+        "url": "audios/bbc_podcast_20260330_062341.mp3",
+        "title": "Global Updates: Conflicts, Crime, and Football News",
+        "summary": "Today, we cover ongoing tensions in the Middle East, a major art theft in Italy, an attempted bomb attack in Paris, and a shake-up in African football.",
+        "timestamp": "2026-03-30T06:23:52.734670",
+        "hashtags": [
+            "#WorldEvents",
+            "#MiddleEastCrisis",
+            "#ArtCrime",
+            "#FootballNews",
+            "#BusinessWatch"
+        ],
         "ielts_score": "6.0"
+    },
+    {
+        "url": "audios/bbc_podcast_20260329_062206.mp3",
+        "title": "Your Daily News: Updates from Around the World",
+        "summary": "Today, we cover aid ships found, celebrity arrests, protests, a major bank lawsuit, and global events.",
+        "timestamp": "2026-03-29T06:22:15.219959",
+        "hashtags": [
+            "#DailyNews",
+            "#WorldEvents",
+            "#USPolitics",
+            "#GlobalIssues",
+            "#SportsNews"
+        ],
+        "ielts_score": "6.0"
+    },
+    {
+        "url": "audios/bbc_podcast_20260328_062350.mp3",
+        "title": "Weekly World Rundown: Key Stories Unpacked",
+        "summary": "This podcast covers major global headlines, from political developments and social issues to international incidents and personal challenges.",
+        "timestamp": "2026-03-28T06:24:03.048539",
+        "hashtags": [
+            "#GlobalNews",
+            "#USPolitics",
+            "#SocialMediaKids",
+            "#Cybersecurity",
+            "#WorldEvents"
+        ],
+        "ielts_score": "7.0"
     },
     {
         "url": "audios/bbc_podcast_20260326_120317.mp3",
@@ -97,4 +195,4 @@ const PODCAST_LIST = [
         "ielts_score": "6.0"
     }
 ];
-const LATEST_PODCAST = "audios/bbc_podcast_20260401_222649.mp3";
+const LATEST_PODCAST = "audios/bbc_podcast_20260403_062544.mp3";
